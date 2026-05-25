@@ -1,8 +1,4 @@
-# Econom𝕏 Advanced Dashboard Upgrade
 
-Replace your entire `pages/index.js` with the following code.
-
-```javascript
 import { useEffect, useState } from "react";
 
 export default function Home() {
