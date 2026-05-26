@@ -2,60 +2,43 @@ import { useState } from "react";
 
 export default function Home() {
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [selectedBloc, setSelectedBloc] = useState("");
+  const [activeSidebar, setActiveSidebar] = useState("dashboard");
 
   const countries = [
     {
       name: "United States",
+      code: "US",
       x: 180,
-      y: 180,
-      gdp: "$30.1T",
+      y: 170,
+      gdp: "$29.1T",
       currency: "US Dollar",
       leader: "Donald Trump",
       capital: "Washington D.C.",
       population: "341M",
       exports: "Technology, Oil, Aircraft",
       imports: "Electronics, Vehicles",
-      bloc: "USMCA",
-      flag: "🇺🇸",
-      war: "No major war on territory",
-      wiki: "https://en.wikipedia.org/wiki/United_States"
+      bloc: "NATO, USMCA",
+      war: "None"
     },
     {
-      name: "Canada",
-      x: 180,
-      y: 110,
-      gdp: "$2.3T",
-      currency: "Canadian Dollar",
-      leader: "Mark Carney",
-      capital: "Ottawa",
-      population: "41M",
-      exports: "Oil, Timber",
-      imports: "Machinery",
-      bloc: "USMCA",
-      flag: "🇨🇦",
-      war: "None",
-      wiki: "https://en.wikipedia.org/wiki/Canada"
-    },
-    {
-      name: "Mexico",
-      x: 210,
-      y: 245,
-      gdp: "$1.9T",
-      currency: "Mexican Peso",
-      leader: "Claudia Sheinbaum",
-      capital: "Mexico City",
-      population: "132M",
-      exports: "Cars, Oil",
-      imports: "Electronics",
-      bloc: "USMCA",
-      flag: "🇲🇽",
-      war: "None",
-      wiki: "https://en.wikipedia.org/wiki/Mexico"
+      name: "China",
+      code: "CN",
+      x: 1030,
+      y: 250,
+      gdp: "$19.5T",
+      currency: "Yuan",
+      leader: "Xi Jinping",
+      capital: "Beijing",
+      population: "1.41B",
+      exports: "Electronics, Machinery",
+      imports: "Oil, Semiconductors",
+      bloc: "BRICS",
+      war: "Taiwan tensions"
     },
     {
       name: "Germany",
-      x: 585,
+      code: "DE",
+      x: 690,
       y: 150,
       gdp: "$4.9T",
       currency: "Euro",
@@ -64,622 +47,563 @@ export default function Home() {
       population: "84M",
       exports: "Cars, Machinery",
       imports: "Energy",
+      bloc: "EU, NATO",
+      war: "None"
+    },
+    {
+      name: "Malta",
+      code: "MT",
+      x: 705,
+      y: 235,
+      gdp: "$25B",
+      currency: "Euro",
+      leader: "Robert Abela",
+      capital: "Valletta",
+      population: "560K",
+      exports: "Electronics, Tourism",
+      imports: "Fuel, Food",
       bloc: "EU",
-      flag: "🇩🇪",
-      war: "None",
-      wiki: "https://en.wikipedia.org/wiki/Germany"
+      war: "None"
+    },
+    {
+      name: "Russia",
+      code: "RU",
+      x: 930,
+      y: 110,
+      gdp: "$2.3T",
+      currency: "Ruble",
+      leader: "Vladimir Putin",
+      capital: "Moscow",
+      population: "144M",
+      exports: "Oil, Gas",
+      imports: "Machinery",
+      bloc: "BRICS",
+      war: "War in Ukraine"
+    },
+    {
+      name: "India",
+      code: "IN",
+      x: 930,
+      y: 340,
+      gdp: "$4.3T",
+      currency: "Rupee",
+      leader: "Narendra Modi",
+      capital: "New Delhi",
+      population: "1.43B",
+      exports: "IT, Pharmaceuticals",
+      imports: "Oil",
+      bloc: "BRICS",
+      war: "None"
+    },
+    {
+      name: "United Kingdom",
+      code: "GB",
+      x: 620,
+      y: 130,
+      gdp: "$3.8T",
+      currency: "Pound Sterling",
+      leader: "Keir Starmer",
+      capital: "London",
+      population: "69M",
+      exports: "Finance, Machinery",
+      imports: "Food, Electronics",
+      bloc: "NATO",
+      war: "None"
     },
     {
       name: "France",
-      x: 550,
-      y: 170,
-      gdp: "$3.4T",
+      code: "FR",
+      x: 650,
+      y: 180,
+      gdp: "$3.3T",
       currency: "Euro",
       leader: "Emmanuel Macron",
       capital: "Paris",
       population: "68M",
-      exports: "Luxury Goods",
-      imports: "Electronics",
-      bloc: "EU",
-      flag: "🇫🇷",
-      war: "None",
-      wiki: "https://en.wikipedia.org/wiki/France"
-    },
-    {
-      name: "Italy",
-      x: 605,
-      y: 205,
-      gdp: "$2.5T",
-      currency: "Euro",
-      leader: "Giorgia Meloni",
-      capital: "Rome",
-      population: "59M",
-      exports: "Fashion, Machinery",
-      imports: "Oil",
-      bloc: "EU",
-      flag: "🇮🇹",
-      war: "None",
-      wiki: "https://en.wikipedia.org/wiki/Italy"
-    },
-    {
-      name: "Spain",
-      x: 510,
-      y: 215,
-      gdp: "$1.8T",
-      currency: "Euro",
-      leader: "Pedro Sánchez",
-      capital: "Madrid",
-      population: "49M",
-      exports: "Cars, Agriculture",
+      exports: "Aircraft, Luxury Goods",
       imports: "Energy",
-      bloc: "EU",
-      flag: "🇪🇸",
-      war: "None",
-      wiki: "https://en.wikipedia.org/wiki/Spain"
-    },
-    {
-      name: "Malta",
-      x: 625,
-      y: 235,
-      gdp: "$27B",
-      currency: "Euro",
-      leader: "Robert Abela",
-      capital: "Valletta",
-      population: "570K",
-      exports: "Services, Electronics",
-      imports: "Fuel",
-      bloc: "EU",
-      flag: "🇲🇹",
-      war: "None",
-      wiki: "https://en.wikipedia.org/wiki/Malta"
-    },
-    {
-      name: "Russia",
-      x: 760,
-      y: 110,
-      gdp: "$2.4T",
-      currency: "Ruble",
-      leader: "Vladimir Putin",
-      capital: "Moscow",
-      population: "143M",
-      exports: "Oil, Gas",
-      imports: "Machinery",
-      bloc: "BRICS",
-      flag: "🇷🇺",
-      war: "War in Ukraine",
-      wiki: "https://en.wikipedia.org/wiki/Russia"
-    },
-    {
-      name: "Ukraine",
-      x: 675,
-      y: 170,
-      gdp: "$210B",
-      currency: "Hryvnia",
-      leader: "Volodymyr Zelenskyy",
-      capital: "Kyiv",
-      population: "37M",
-      exports: "Grain",
-      imports: "Weapons",
-      bloc: "EU Candidate",
-      flag: "🇺🇦",
-      war: "Russian invasion",
-      wiki: "https://en.wikipedia.org/wiki/Ukraine"
-    },
-    {
-      name: "China",
-      x: 980,
-      y: 230,
-      gdp: "$19.8T",
-      currency: "Yuan",
-      leader: "Xi Jinping",
-      capital: "Beijing",
-      population: "1.41B",
-      exports: "Electronics",
-      imports: "Oil",
-      bloc: "BRICS",
-      flag: "🇨🇳",
-      war: "No active war",
-      wiki: "https://en.wikipedia.org/wiki/China"
-    },
-    {
-      name: "India",
-      x: 860,
-      y: 310,
-      gdp: "$4.3T",
-      currency: "Indian Rupee",
-      leader: "Narendra Modi",
-      capital: "New Delhi",
-      population: "1.44B",
-      exports: "IT Services",
-      imports: "Oil",
-      bloc: "BRICS",
-      flag: "🇮🇳",
-      war: "Border tensions",
-      wiki: "https://en.wikipedia.org/wiki/India"
+      bloc: "EU, NATO",
+      war: "None"
     },
     {
       name: "Japan",
-      x: 1090,
-      y: 240,
-      gdp: "$4.5T",
+      code: "JP",
+      x: 1180,
+      y: 220,
+      gdp: "$4.2T",
       currency: "Yen",
       leader: "Shigeru Ishiba",
       capital: "Tokyo",
       population: "123M",
-      exports: "Cars, Tech",
+      exports: "Cars, Electronics",
       imports: "Energy",
       bloc: "G7",
-      flag: "🇯🇵",
-      war: "None",
-      wiki: "https://en.wikipedia.org/wiki/Japan"
-    },
-    {
-      name: "South Korea",
-      x: 1045,
-      y: 245,
-      gdp: "$1.9T",
-      currency: "Won",
-      leader: "Han Duck-soo",
-      capital: "Seoul",
-      population: "52M",
-      exports: "Semiconductors",
-      imports: "Oil",
-      bloc: "OECD",
-      flag: "🇰🇷",
-      war: "Korean conflict unresolved",
-      wiki: "https://en.wikipedia.org/wiki/South_Korea"
-    },
-    {
-      name: "Saudi Arabia",
-      x: 760,
-      y: 310,
-      gdp: "$1.2T",
-      currency: "Saudi Riyal",
-      leader: "Mohammed bin Salman",
-      capital: "Riyadh",
-      population: "38M",
-      exports: "Oil",
-      imports: "Machinery",
-      bloc: "OPEC",
-      flag: "🇸🇦",
-      war: "Regional tensions",
-      wiki: "https://en.wikipedia.org/wiki/Saudi_Arabia"
-    },
-    {
-      name: "Iran",
-      x: 790,
-      y: 285,
-      gdp: "$430B",
-      currency: "Rial",
-      leader: "Ali Khamenei",
-      capital: "Tehran",
-      population: "91M",
-      exports: "Oil",
-      imports: "Machinery",
-      bloc: "BRICS",
-      flag: "🇮🇷",
-      war: "Regional conflict",
-      wiki: "https://en.wikipedia.org/wiki/Iran"
-    },
-    {
-      name: "Israel",
-      x: 690,
-      y: 285,
-      gdp: "$580B",
-      currency: "Shekel",
-      leader: "Benjamin Netanyahu",
-      capital: "Jerusalem",
-      population: "10M",
-      exports: "Technology",
-      imports: "Fuel",
-      bloc: "OECD",
-      flag: "🇮🇱",
-      war: "Conflict in Gaza",
-      wiki: "https://en.wikipedia.org/wiki/Israel"
-    },
-    {
-      name: "South Africa",
-      x: 670,
-      y: 570,
-      gdp: "$430B",
-      currency: "Rand",
-      leader: "Cyril Ramaphosa",
-      capital: "Pretoria",
-      population: "63M",
-      exports: "Gold, Platinum",
-      imports: "Machinery",
-      bloc: "BRICS",
-      flag: "🇿🇦",
-      war: "None",
-      wiki: "https://en.wikipedia.org/wiki/South_Africa"
-    },
-    {
-      name: "Nigeria",
-      x: 560,
-      y: 410,
-      gdp: "$510B",
-      currency: "Naira",
-      leader: "Bola Tinubu",
-      capital: "Abuja",
-      population: "235M",
-      exports: "Oil",
-      imports: "Machinery",
-      bloc: "African Union",
-      flag: "🇳🇬",
-      war: "Insurgency in regions",
-      wiki: "https://en.wikipedia.org/wiki/Nigeria"
+      war: "None"
     },
     {
       name: "Brazil",
-      x: 360,
+      code: "BR",
+      x: 370,
       y: 470,
       gdp: "$2.3T",
-      currency: "Brazilian Real",
+      currency: "Real",
       leader: "Luiz Inácio Lula da Silva",
       capital: "Brasília",
       population: "216M",
       exports: "Soybeans, Iron",
       imports: "Electronics",
-      bloc: "MERCOSUR",
-      flag: "🇧🇷",
-      war: "None",
-      wiki: "https://en.wikipedia.org/wiki/Brazil"
-    },
+      bloc: "MERCOSUR, BRICS",
+      war: "None"
+    }
   ];
 
   const companies = [
-    { name: "Apple", ticker: "AAPL", price: "$238", change: "+1.7%" },
-    { name: "Microsoft", ticker: "MSFT", price: "$515", change: "+0.9%" },
-    { name: "NVIDIA", ticker: "NVDA", price: "$1380", change: "+3.1%" },
-    { name: "Tesla", ticker: "TSLA", price: "$212", change: "-1.8%" },
-    { name: "Amazon", ticker: "AMZN", price: "$228", change: "+1.1%" },
-    { name: "Meta", ticker: "META", price: "$642", change: "+0.8%" },
-    { name: "Alphabet", ticker: "GOOG", price: "$193", change: "+1.2%" },
-    { name: "Samsung", ticker: "005930", price: "₩94,000", change: "-0.4%" },
-    { name: "BYD", ticker: "BYD", price: "$48", change: "+2.5%" },
-    { name: "ExxonMobil", ticker: "XOM", price: "$126", change: "+0.6%" },
+    ["Apple", "+2.1%", "green"],
+    ["Microsoft", "+1.3%", "green"],
+    ["NVIDIA", "+4.8%", "green"],
+    ["Tesla", "-1.9%", "red"],
+    ["Amazon", "+0.8%", "green"],
+    ["Meta", "+2.5%", "green"],
+    ["Google", "+1.4%", "green"],
+    ["Samsung", "-0.7%", "red"],
+    ["BYD", "+5.1%", "green"],
+    ["ExxonMobil", "-1.2%", "red"]
   ];
 
   const cryptos = [
-    { name: "Bitcoin", price: "$103,000", change: "+4.5%" },
-    { name: "Ethereum", price: "$5,200", change: "+3.1%" },
-    { name: "Solana", price: "$280", change: "-1.2%" },
-    { name: "XRP", price: "$2.75", change: "+1.8%" },
-    { name: "Cardano", price: "$1.12", change: "-0.5%" },
+    ["Bitcoin", "+3.4%", "green"],
+    ["Ethereum", "+2.1%", "green"],
+    ["Solana", "-4.1%", "red"],
+    ["XRP", "+1.5%", "green"],
+    ["Dogecoin", "-2.7%", "red"]
   ];
 
-  const oil = [
-    { name: "Brent Crude", price: "$83", change: "+0.7%" },
-    { name: "WTI", price: "$79", change: "-0.3%" },
-    { name: "Saudi Aramco", price: "$8.12", change: "+0.5%" },
-    { name: "Shell", price: "$74", change: "-1.1%" },
-  ];
+  const news = {
+    politics: [
+      {
+        title: "EU discusses new sanctions package",
+        link: "https://en.wikipedia.org/wiki/European_Union"
+      },
+      {
+        title: "US Election campaign intensifies",
+        link: "https://en.wikipedia.org/wiki/2024_United_States_presidential_election"
+      }
+    ],
+    science: [
+      {
+        title: "SpaceX Flight 12 launches successfully",
+        link: "https://en.wikipedia.org/wiki/SpaceX_Starship_integrated_flight_test_12"
+      },
+      {
+        title: "Fusion breakthroughs continue",
+        link: "https://en.wikipedia.org/wiki/Nuclear_fusion"
+      }
+    ],
+    finance: [
+      {
+        title: "Global markets rally in May 2026",
+        link: "https://en.wikipedia.org/wiki/World_economy"
+      },
+      {
+        title: "Oil prices fluctuate amid tensions",
+        link: "https://en.wikipedia.org/wiki/Brent_Crude"
+      }
+    ]
+  };
 
   return (
     <div
       style={{
-        background: "#020202",
-        minHeight: "100vh",
+        background: "#050505",
         color: "white",
+        minHeight: "100vh",
         fontFamily: "Arial",
-        display: "flex",
+        overflow: "hidden"
       }}
     >
+      {/* CORNER DESIGNS */}
       <div
         style={{
-          width: "280px",
-          borderRight: "1px solid #333",
-          padding: "20px",
-          background: "#050505",
+          position: "fixed",
+          top: 20,
+          left: 20,
+          width: 80,
+          height: 80,
+          borderTop: "2px solid white",
+          borderLeft: "2px solid white",
+          opacity: 0.4
+        }}
+      />
+
+      <div
+        style={{
+          position: "fixed",
+          bottom: 20,
+          right: 20,
+          width: 80,
+          height: 80,
+          borderBottom: "2px solid white",
+          borderRight: "2px solid white",
+          opacity: 0.4
+        }}
+      />
+
+      {/* SIDEBAR */}
+      <div
+        style={{
+          position: "fixed",
+          left: 0,
+          top: 0,
+          width: 230,
+          height: "100vh",
+          borderRight: "1px solid #222",
+          background: "#0b0b0b",
+          padding: 25
+        }}
+      >
+        <div
+          onClick={() => setActiveSidebar("dashboard")}
+          style={{
+            fontSize: 38,
+            fontWeight: "bold",
+            cursor: "pointer",
+            marginBottom: 5
+          }}
+        >
+          Econom<span style={{ letterSpacing: "-3px" }}>X</span>
+        </div>
+
+        <div
+          style={{
+            color: "#888",
+            marginBottom: 30
+          }}
+        >
+          by Luke Buttiġieġ
+        </div>
+
+        {[
+          "dashboard",
+          "markets",
+          "currencies",
+          "news",
+          "trade blocs"
+        ].map((item) => (
+          <div
+            key={item}
+            onClick={() => setActiveSidebar(item)}
+            style={{
+              padding: 14,
+              marginBottom: 10,
+              border: "1px solid #222",
+              cursor: "pointer",
+              transition: "0.3s",
+              background:
+                activeSidebar === item ? "white" : "transparent",
+              color:
+                activeSidebar === item ? "black" : "white"
+            }}
+          >
+            {item.toUpperCase()}
+          </div>
+        ))}
+      </div>
+
+      {/* MAIN */}
+      <div
+        style={{
+          marginLeft: 260,
+          padding: 30
         }}
       >
         <h1
           style={{
-            fontSize: "38px",
-            marginBottom: "0",
-            letterSpacing: "2px",
+            fontSize: 42,
+            marginBottom: 0
           }}
         >
-          Econom<span style={{ fontWeight: "900" }}>𝕏</span>
+          Global Economic Intelligence
         </h1>
 
-        <p style={{ color: "#999", marginTop: "5px" }}>
-          by Luke Buttiġieġ
-        </p>
-
-        <div style={{ marginTop: "40px" }}>
-          <h3>Trade Blocs</h3>
-
-          {["EU", "BRICS", "USMCA", "MERCOSUR", "OPEC"].map((bloc) => (
-            <button
-              key={bloc}
-              onClick={() =>
-                setSelectedBloc(selectedBloc === bloc ? "" : bloc)
-              }
-              style={{
-                width: "100%",
-                padding: "10px",
-                marginTop: "8px",
-                background:
-                  selectedBloc === bloc ? "white" : "#111",
-                color:
-                  selectedBloc === bloc ? "black" : "white",
-                border: "1px solid white",
-                cursor: "pointer",
-              }}
-            >
-              {bloc}
-            </button>
-          ))}
-        </div>
-
-        <div style={{ marginTop: "40px" }}>
-          <h3>Markets</h3>
-
-          {companies.map((c) => (
-            <div
-              key={c.name}
-              style={{
-                padding: "8px",
-                borderBottom: "1px solid #222",
-              }}
-            >
-              <b>{c.name}</b>
-              <div>{c.price}</div>
-              <div
-                style={{
-                  color:
-                    c.change.includes("-") ? "#ff4d4d" : "#6cff6c",
-                }}
-              >
-                {c.change}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div style={{ marginTop: "40px" }}>
-          <h3>Crypto</h3>
-
-          {cryptos.map((c) => (
-            <div
-              key={c.name}
-              style={{
-                padding: "8px",
-                borderBottom: "1px solid #222",
-              }}
-            >
-              <b>{c.name}</b>
-              <div>{c.price}</div>
-              <div
-                style={{
-                  color:
-                    c.change.includes("-") ? "#ff4d4d" : "#6cff6c",
-                }}
-              >
-                {c.change}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div style={{ marginTop: "40px" }}>
-          <h3>Oil</h3>
-
-          {oil.map((o) => (
-            <div
-              key={o.name}
-              style={{
-                padding: "8px",
-                borderBottom: "1px solid #222",
-              }}
-            >
-              <b>{o.name}</b>
-              <div>{o.price}</div>
-              <div
-                style={{
-                  color:
-                    o.change.includes("-") ? "#ff4d4d" : "#6cff6c",
-                }}
-              >
-                {o.change}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div
-        style={{
-          flex: 1,
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
         <div
           style={{
-            position: "absolute",
-            top: "20px",
-            left: "20px",
-            right: "20px",
-            bottom: "20px",
-            border: "1px solid rgba(255,255,255,0.15)",
-            pointerEvents: "none",
-          }}
-        />
-
-        <svg
-          viewBox="0 0 1400 750"
-          style={{
-            width: "100%",
-            height: "100vh",
-            background: "#000",
+            color: "#888",
+            marginBottom: 25
           }}
         >
-          <image
-            href="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg"
-            x="0"
-            y="0"
-            width="1400"
-            height="750"
-            opacity="0.92"
+          Economic, geopolitical and market overview — May 2026
+        </div>
+
+        {/* MAP */}
+        <div
+          style={{
+            position: "relative",
+            background: "#000",
+            border: "1px solid #222",
+            padding: 20,
+            borderRadius: 20,
+            overflow: "hidden"
+          }}
+        >
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg"
+            style={{
+              width: "100%",
+              opacity: 0.95
+            }}
           />
 
           {countries.map((country) => (
-            <circle
+            <div
               key={country.name}
-              cx={country.x}
-              cy={country.y}
-              r="10"
-              fill={
-                selectedBloc === country.bloc
-                  ? "#00ff99"
-                  : "white"
-              }
-              stroke="black"
-              strokeWidth="2"
+              onClick={() => setSelectedCountry(country)}
+              title={country.name}
               style={{
+                position: "absolute",
+                left: country.x,
+                top: country.y,
+                width: 16,
+                height: 16,
+                borderRadius: "50%",
+                background: "white",
                 cursor: "pointer",
                 transition: "0.3s",
+                boxShadow: "0 0 15px white"
               }}
-              onClick={() => setSelectedCountry(country)}
             />
           ))}
-        </svg>
+        </div>
 
+        {/* COUNTRY PANEL */}
         {selectedCountry && (
           <div
             style={{
-              position: "absolute",
-              top: "80px",
-              right: "40px",
-              width: "340px",
-              background: "rgba(0,0,0,0.94)",
-              border: "1px solid white",
-              padding: "22px",
-              backdropFilter: "blur(12px)",
-              animation: "fade 0.3s",
+              marginTop: 20,
+              border: "1px solid #333",
+              borderRadius: 20,
+              padding: 25,
+              background: "#0d0d0d",
+              animation: "fade 0.3s"
             }}
           >
-            <h2>
-              {selectedCountry.flag} {selectedCountry.name}
-            </h2>
+            <h2>{selectedCountry.name}</h2>
 
-            <p><b>Leader:</b> {selectedCountry.leader}</p>
-            <p><b>GDP:</b> {selectedCountry.gdp}</p>
-            <p><b>Currency:</b> {selectedCountry.currency}</p>
-            <p><b>Capital:</b> {selectedCountry.capital}</p>
-            <p><b>Population:</b> {selectedCountry.population}</p>
-            <p><b>Exports:</b> {selectedCountry.exports}</p>
-            <p><b>Imports:</b> {selectedCountry.imports}</p>
-            <p><b>Trade Bloc:</b> {selectedCountry.bloc}</p>
-            <p><b>Conflict:</b> {selectedCountry.war}</p>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: 12
+              }}
+            >
+              <div>GDP: {selectedCountry.gdp}</div>
+              <div>Currency: {selectedCountry.currency}</div>
+              <div>Leader: {selectedCountry.leader}</div>
+              <div>Capital: {selectedCountry.capital}</div>
+              <div>Population: {selectedCountry.population}</div>
+              <div>Trade Bloc: {selectedCountry.bloc}</div>
+              <div>Main Exports: {selectedCountry.exports}</div>
+              <div>Main Imports: {selectedCountry.imports}</div>
+              <div>Conflict Status: {selectedCountry.war}</div>
+            </div>
 
             <a
-              href={selectedCountry.wiki}
+              href={`https://en.wikipedia.org/wiki/${selectedCountry.name}`}
               target="_blank"
               style={{
                 color: "white",
-                border: "1px solid white",
-                padding: "8px 12px",
                 display: "inline-block",
-                marginTop: "10px",
-                textDecoration: "none",
+                marginTop: 20
               }}
             >
-              Wikipedia
+              Open Wikipedia →
             </a>
-
-            <button
-              onClick={() => setSelectedCountry(null)}
-              style={{
-                marginLeft: "10px",
-                padding: "8px 12px",
-                background: "white",
-                color: "black",
-                border: "none",
-                cursor: "pointer",
-              }}
-            >
-              Close
-            </button>
           </div>
         )}
 
+        {/* MARKETS */}
         <div
           style={{
-            position: "absolute",
-            top: "20px",
-            right: "20px",
-            color: "white",
-            fontSize: "14px",
-            textAlign: "right",
+            marginTop: 30,
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr 1fr",
+            gap: 20
           }}
         >
-          <div>GMT: {new Date().toUTCString()}</div>
-          <div>
-            Malta:{" "}
-            {new Date().toLocaleString("en-MT", {
-              timeZone: "Europe/Malta",
-            })}
-          </div>
-        </div>
+          <div
+            style={{
+              border: "1px solid #222",
+              borderRadius: 20,
+              padding: 20
+            }}
+          >
+            <h2>Top Companies</h2>
 
-        <div
-          style={{
-            position: "absolute",
-            bottom: "20px",
-            right: "20px",
-            width: "420px",
-            background: "rgba(0,0,0,0.92)",
-            border: "1px solid white",
-            padding: "18px",
-          }}
-        >
-          <h3>Global Economic Intelligence</h3>
+            {companies.map((c) => (
+              <div
+                key={c[0]}
+                style={{
+                  marginBottom: 16
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between"
+                  }}
+                >
+                  <span>{c[0]}</span>
 
-          <div style={{ marginTop: "15px" }}>
-            <h4>Science</h4>
-            <a
-              href="https://www.spacex.com"
-              target="_blank"
-              style={{ color: "white" }}
-            >
-              SpaceX Flight 12 launches successfully
-            </a>
-          </div>
+                  <span
+                    style={{
+                      color:
+                        c[2] === "green"
+                          ? "#00ff99"
+                          : "#ff4d4d"
+                    }}
+                  >
+                    {c[1]}
+                  </span>
+                </div>
 
-          <div style={{ marginTop: "15px" }}>
-            <h4>Politics</h4>
-            <a
-              href="https://www.reuters.com/"
-              target="_blank"
-              style={{ color: "white" }}
-            >
-              NATO discusses Eastern Europe tensions
-            </a>
-          </div>
-
-          <div style={{ marginTop: "15px" }}>
-            <h4>Finance</h4>
-            <a
-              href="https://www.bloomberg.com/"
-              target="_blank"
-              style={{ color: "white" }}
-            >
-              Global markets react to AI investment boom
-            </a>
+                <div
+                  style={{
+                    height: 5,
+                    background:
+                      c[2] === "green"
+                        ? "linear-gradient(to right,#0f0,#030)"
+                        : "linear-gradient(to right,#f00,#300)",
+                    marginTop: 5,
+                    borderRadius: 5
+                  }}
+                />
+              </div>
+            ))}
           </div>
 
-          <div style={{ marginTop: "15px" }}>
-            <h4>Technology</h4>
-            <a
-              href="https://www.theverge.com/"
-              target="_blank"
-              style={{ color: "white" }}
+          <div
+            style={{
+              border: "1px solid #222",
+              borderRadius: 20,
+              padding: 20
+            }}
+          >
+            <h2>Cryptocurrencies</h2>
+
+            {cryptos.map((c) => (
+              <div
+                key={c[0]}
+                style={{
+                  marginBottom: 16
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between"
+                  }}
+                >
+                  <span>{c[0]}</span>
+
+                  <span
+                    style={{
+                      color:
+                        c[2] === "green"
+                          ? "#00ff99"
+                          : "#ff4d4d"
+                    }}
+                  >
+                    {c[1]}
+                  </span>
+                </div>
+
+                <div
+                  style={{
+                    height: 5,
+                    background:
+                      c[2] === "green"
+                        ? "linear-gradient(to right,#0f0,#030)"
+                        : "linear-gradient(to right,#f00,#300)",
+                    marginTop: 5,
+                    borderRadius: 5
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+
+          <div
+            style={{
+              border: "1px solid #222",
+              borderRadius: 20,
+              padding: 20
+            }}
+          >
+            <h2>News</h2>
+
+            <div
+              style={{
+                marginBottom: 20
+              }}
             >
-              NVIDIA announces next-generation AI chips
-            </a>
+              <h3>Politics</h3>
+
+              {news.politics.map((n) => (
+                <a
+                  key={n.title}
+                  href={n.link}
+                  target="_blank"
+                  style={{
+                    display: "block",
+                    color: "white",
+                    marginBottom: 10
+                  }}
+                >
+                  • {n.title}
+                </a>
+              ))}
+            </div>
+
+            <div
+              style={{
+                marginBottom: 20
+              }}
+            >
+              <h3>Science</h3>
+
+              {news.science.map((n) => (
+                <a
+                  key={n.title}
+                  href={n.link}
+                  target="_blank"
+                  style={{
+                    display: "block",
+                    color: "white",
+                    marginBottom: 10
+                  }}
+                >
+                  • {n.title}
+                </a>
+              ))}
+            </div>
+
+            <div>
+              <h3>Finance</h3>
+
+              {news.finance.map((n) => (
+                <a
+                  key={n.title}
+                  href={n.link}
+                  target="_blank"
+                  style={{
+                    display: "block",
+                    color: "white",
+                    marginBottom: 10
+                  }}
+                >
+                  • {n.title}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
