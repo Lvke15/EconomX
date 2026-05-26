@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 export default function Home() {
   const [page, setPage] = useState("dashboard");
   const [selectedCountry, setSelectedCountry] = useState(null);
+  const [selectedMarket, setSelectedMarket] = useState(null);
+  const [selectedBloc, setSelectedBloc] = useState(null);
 
   const [gmtTime, setGmtTime] = useState("");
   const [maltaTime, setMaltaTime] = useState("");
@@ -29,105 +31,84 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  // =========================
+  // COUNTRIES
+  // =========================
+
   const countries = [
     {
       name: "United States",
-      x: 180,
+      short: "USA",
+      x: 190,
       y: 220,
       gdp: "$29.1T",
-      currency: "US Dollar",
+      currency: "USD",
       leader: "Donald Trump",
       capital: "Washington D.C.",
       population: "341M",
-      exports: "Technology, Oil, Aircraft",
-      imports: "Electronics, Machinery",
       bloc: "USMCA / NATO",
       flag: "🇺🇸",
-      war: "No active war",
     },
 
     {
       name: "Canada",
-      x: 180,
+      short: "Canada",
+      x: 190,
       y: 140,
       gdp: "$2.3T",
-      currency: "Canadian Dollar",
+      currency: "CAD",
       leader: "Mark Carney",
       capital: "Ottawa",
       population: "41M",
-      exports: "Oil, Lumber",
-      imports: "Vehicles",
       bloc: "USMCA / NATO",
       flag: "🇨🇦",
-      war: "No active war",
     },
 
     {
       name: "Mexico",
-      x: 210,
+      short: "Mexico",
+      x: 220,
       y: 280,
       gdp: "$1.9T",
-      currency: "Mexican Peso",
+      currency: "Peso",
       leader: "Claudia Sheinbaum",
       capital: "Mexico City",
       population: "132M",
-      exports: "Cars, Electronics",
-      imports: "Machinery",
       bloc: "USMCA",
       flag: "🇲🇽",
-      war: "No active war",
-    },
-
-    {
-      name: "Brazil",
-      x: 350,
-      y: 470,
-      gdp: "$2.4T",
-      currency: "Brazilian Real",
-      leader: "Luiz Inácio Lula da Silva",
-      capital: "Brasília",
-      population: "214M",
-      exports: "Soybeans, Iron",
-      imports: "Machinery",
-      bloc: "MERCOSUR",
-      flag: "🇧🇷",
-      war: "No active war",
     },
 
     {
       name: "United Kingdom",
+      short: "UK",
       x: 670,
-      y: 170,
+      y: 180,
       gdp: "$3.8T",
-      currency: "Pound Sterling",
+      currency: "Pound",
       leader: "Keir Starmer",
       capital: "London",
       population: "69M",
-      exports: "Finance, Cars",
-      imports: "Electronics",
       bloc: "NATO",
       flag: "🇬🇧",
-      war: "No active war",
     },
 
     {
       name: "France",
+      short: "France",
       x: 720,
-      y: 210,
+      y: 220,
       gdp: "$3.2T",
       currency: "Euro",
       leader: "Emmanuel Macron",
       capital: "Paris",
       population: "65M",
-      exports: "Aircraft, Luxury",
-      imports: "Energy",
-      bloc: "EU / NATO",
+      bloc: "EU",
       flag: "🇫🇷",
-      war: "No active war",
     },
 
     {
       name: "Germany",
+      short: "Germany",
       x: 760,
       y: 180,
       gdp: "$4.9T",
@@ -135,47 +116,27 @@ export default function Home() {
       leader: "Friedrich Merz",
       capital: "Berlin",
       population: "84M",
-      exports: "Cars, Machinery",
-      imports: "Energy",
-      bloc: "EU / NATO",
+      bloc: "EU",
       flag: "🇩🇪",
-      war: "No active war",
     },
 
     {
       name: "Italy",
+      short: "Italy",
       x: 780,
-      y: 240,
+      y: 250,
       gdp: "$2.5T",
       currency: "Euro",
       leader: "Giorgia Meloni",
       capital: "Rome",
       population: "59M",
-      exports: "Cars, Fashion",
-      imports: "Energy",
-      bloc: "EU / NATO",
+      bloc: "EU",
       flag: "🇮🇹",
-      war: "No active war",
-    },
-
-    {
-      name: "Spain",
-      x: 690,
-      y: 260,
-      gdp: "$1.9T",
-      currency: "Euro",
-      leader: "Pedro Sánchez",
-      capital: "Madrid",
-      population: "49M",
-      exports: "Cars, Tourism",
-      imports: "Oil",
-      bloc: "EU / NATO",
-      flag: "🇪🇸",
-      war: "No active war",
     },
 
     {
       name: "Malta",
+      short: "Malta",
       x: 820,
       y: 300,
       gdp: "$28B",
@@ -183,47 +144,27 @@ export default function Home() {
       leader: "Robert Abela",
       capital: "Valletta",
       population: "570K",
-      exports: "Electronics, Services",
-      imports: "Fuel",
       bloc: "EU",
       flag: "🇲🇹",
-      war: "No active war",
     },
 
     {
       name: "Russia",
+      short: "Russia",
       x: 980,
       y: 120,
       gdp: "$2.4T",
-      currency: "Russian Ruble",
+      currency: "Ruble",
       leader: "Vladimir Putin",
       capital: "Moscow",
       population: "144M",
-      exports: "Oil, Gas",
-      imports: "Electronics",
       bloc: "BRICS",
       flag: "🇷🇺",
-      war: "Ukraine War",
-    },
-
-    {
-      name: "Ukraine",
-      x: 860,
-      y: 180,
-      gdp: "$189B",
-      currency: "Hryvnia",
-      leader: "Volodymyr Zelenskyy",
-      capital: "Kyiv",
-      population: "37M",
-      exports: "Grain",
-      imports: "Weapons",
-      bloc: "EU Candidate",
-      flag: "🇺🇦",
-      war: "Russia-Ukraine War",
     },
 
     {
       name: "China",
+      short: "China",
       x: 1220,
       y: 240,
       gdp: "$19.5T",
@@ -231,31 +172,27 @@ export default function Home() {
       leader: "Xi Jinping",
       capital: "Beijing",
       population: "1.41B",
-      exports: "Electronics",
-      imports: "Oil",
       bloc: "BRICS",
       flag: "🇨🇳",
-      war: "No active war",
     },
 
     {
       name: "India",
+      short: "India",
       x: 1100,
       y: 330,
       gdp: "$4.3T",
-      currency: "Indian Rupee",
+      currency: "Rupee",
       leader: "Narendra Modi",
       capital: "New Delhi",
       population: "1.43B",
-      exports: "IT Services",
-      imports: "Oil",
       bloc: "BRICS",
       flag: "🇮🇳",
-      war: "No active war",
     },
 
     {
       name: "Japan",
+      short: "Japan",
       x: 1380,
       y: 250,
       gdp: "$4.5T",
@@ -263,15 +200,13 @@ export default function Home() {
       leader: "Shigeru Ishiba",
       capital: "Tokyo",
       population: "123M",
-      exports: "Cars, Electronics",
-      imports: "Oil",
       bloc: "G7",
       flag: "🇯🇵",
-      war: "No active war",
     },
 
     {
       name: "South Korea",
+      short: "Korea",
       x: 1330,
       y: 260,
       gdp: "$1.9T",
@@ -279,154 +214,203 @@ export default function Home() {
       leader: "Han Duck-soo",
       capital: "Seoul",
       population: "52M",
-      exports: "Semiconductors",
-      imports: "Oil",
       bloc: "OECD",
       flag: "🇰🇷",
-      war: "Korean Conflict",
     },
 
     {
-      name: "Saudi Arabia",
-      x: 960,
-      y: 340,
-      gdp: "$1.1T",
-      currency: "Saudi Riyal",
-      leader: "Mohammed bin Salman",
-      capital: "Riyadh",
-      population: "38M",
-      exports: "Oil",
-      imports: "Machinery",
-      bloc: "OPEC",
-      flag: "🇸🇦",
-      war: "Regional tensions",
+      name: "Indonesia",
+      short: "Indonesia",
+      x: 1220,
+      y: 470,
+      gdp: "$1.6T",
+      currency: "Rupiah",
+      leader: "Prabowo Subianto",
+      capital: "Jakarta",
+      population: "282M",
+      bloc: "ASEAN",
+      flag: "🇮🇩",
     },
 
     {
-      name: "Israel",
-      x: 900,
-      y: 310,
-      gdp: "$570B",
-      currency: "Shekel",
-      leader: "Benjamin Netanyahu",
-      capital: "Jerusalem",
-      population: "9.9M",
-      exports: "Technology",
-      imports: "Oil",
-      bloc: "OECD",
-      flag: "🇮🇱",
-      war: "Israel-Hamas Conflict",
+      name: "Thailand",
+      short: "Thailand",
+      x: 1160,
+      y: 390,
+      gdp: "$620B",
+      currency: "Baht",
+      leader: "Srettha Thavisin",
+      capital: "Bangkok",
+      population: "71M",
+      bloc: "ASEAN",
+      flag: "🇹🇭",
     },
 
     {
-      name: "Iran",
-      x: 980,
-      y: 300,
-      gdp: "$450B",
-      currency: "Iranian Rial",
-      leader: "Ali Khamenei",
-      capital: "Tehran",
-      population: "89M",
-      exports: "Oil",
-      imports: "Machinery",
-      bloc: "BRICS",
-      flag: "🇮🇷",
-      war: "Middle East conflict",
+      name: "Singapore",
+      short: "Singapore",
+      x: 1180,
+      y: 460,
+      gdp: "$530B",
+      currency: "SGD",
+      leader: "Lawrence Wong",
+      capital: "Singapore",
+      population: "6M",
+      bloc: "ASEAN",
+      flag: "🇸🇬",
     },
 
     {
-      name: "South Africa",
-      x: 860,
-      y: 700,
-      gdp: "$420B",
-      currency: "Rand",
-      leader: "Cyril Ramaphosa",
-      capital: "Pretoria",
-      population: "62M",
-      exports: "Gold, Platinum",
-      imports: "Machinery",
-      bloc: "BRICS",
-      flag: "🇿🇦",
-      war: "No active war",
+      name: "Switzerland",
+      short: "Swiss",
+      x: 740,
+      y: 200,
+      gdp: "$980B",
+      currency: "CHF",
+      leader: "Viola Amherd",
+      capital: "Bern",
+      population: "9M",
+      bloc: "EFTA",
+      flag: "🇨🇭",
     },
 
     {
-      name: "Nigeria",
+      name: "Norway",
+      short: "Norway",
       x: 760,
-      y: 520,
-      gdp: "$390B",
-      currency: "Naira",
-      leader: "Bola Tinubu",
-      capital: "Abuja",
-      population: "229M",
-      exports: "Oil",
-      imports: "Machinery",
-      bloc: "African Union",
-      flag: "🇳🇬",
-      war: "Insurgency",
+      y: 90,
+      gdp: "$610B",
+      currency: "Krone",
+      leader: "Jonas Gahr Støre",
+      capital: "Oslo",
+      population: "5.5M",
+      bloc: "EFTA / EEA",
+      flag: "🇳🇴",
     },
   ];
 
-  const marketData = [
+  // =========================
+  // MARKETS
+  // =========================
+
+  const [marketData, setMarketData] = useState([
     {
       name: "Apple",
-      value: "$214.83",
+      category: "Companies",
+      value: 214.8,
       change: "+1.4%",
-      positive: true,
+      logo: "🍎",
+      info: "Largest tech company in the world.",
     },
+
     {
       name: "Microsoft",
-      value: "$468.22",
-      change: "+0.8%",
-      positive: true,
+      category: "Companies",
+      value: 468.2,
+      change: "+0.9%",
+      logo: "🪟",
+      info: "Global software and cloud giant.",
     },
-    {
-      name: "Tesla",
-      value: "$178.12",
-      change: "-2.1%",
-      positive: false,
-    },
-    {
-      name: "NVIDIA",
-      value: "$132.11",
-      change: "+3.2%",
-      positive: true,
-    },
-    {
-      name: "Amazon",
-      value: "$205.71",
-      change: "+1.1%",
-      positive: true,
-    },
-    {
-      name: "Google",
-      value: "$177.42",
-      change: "+0.7%",
-      positive: true,
-    },
-    {
-      name: "Meta",
-      value: "$513.55",
-      change: "+2.4%",
-      positive: true,
-    },
-    {
-      name: "Brent Oil",
-      value: "$83.10",
-      change: "-0.4%",
-      positive: false,
-    },
+
     {
       name: "Bitcoin",
-      value: "$108,100",
-      change: "+4.2%",
-      positive: true,
+      category: "Crypto",
+      value: 108100,
+      change: "+3.8%",
+      logo: "₿",
+      info: "Largest cryptocurrency.",
     },
+
     {
       name: "Ethereum",
-      value: "$5,210",
-      change: "+2.8%",
-      positive: true,
+      category: "Crypto",
+      value: 5210,
+      change: "+2.1%",
+      logo: "◆",
+      info: "Smart contract blockchain.",
+    },
+
+    {
+      name: "Brent Oil",
+      category: "Oil",
+      value: 83.1,
+      change: "-0.4%",
+      logo: "🛢️",
+      info: "Global oil benchmark.",
+    },
+
+    {
+      name: "EUR/USD",
+      category: "Currencies",
+      value: 1.11,
+      change: "+0.1%",
+      logo: "💶",
+      info: "Euro to US Dollar exchange rate.",
+    },
+  ]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setMarketData((prev) =>
+        prev.map((item) => ({
+          ...item,
+          value:
+            typeof item.value === "number"
+              ? Number(
+                  (
+                    item.value +
+                    (Math.random() - 0.5)
+                  ).toFixed(2)
+                )
+              : item.value,
+        }))
+      );
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // =========================
+  // TRADE BLOCS
+  // =========================
+
+  const blocs = [
+    {
+      name: "European Union",
+      logo: "🇪🇺",
+      members: "27 Member States",
+      economy: "$20T+ GDP",
+      wiki:
+        "https://en.wikipedia.org/wiki/European_Union",
+    },
+
+    {
+      name: "ASEAN",
+      logo: "🌏",
+      members: "10 Member States",
+      economy: "$4T+ GDP",
+      wiki:
+        "https://en.wikipedia.org/wiki/ASEAN",
+    },
+
+    {
+      name: "EFTA",
+      logo: "❄️",
+      members:
+        "Norway, Switzerland, Iceland, Liechtenstein",
+      economy: "$1.4T GDP",
+      wiki:
+        "https://en.wikipedia.org/wiki/EFTA",
+    },
+
+    {
+      name: "BRICS",
+      logo: "🌐",
+      members:
+        "Brazil, Russia, India, China, South Africa",
+      economy: "$30T+ GDP",
+      wiki:
+        "https://en.wikipedia.org/wiki/BRICS",
     },
   ];
 
@@ -448,16 +432,18 @@ export default function Home() {
   return (
     <div className="container">
 
+      {/* SIDEBAR */}
+
       <div className="sidebar">
 
         <div
           className="logo"
           onClick={() => setPage("dashboard")}
         >
-          Econom<span className="xLogo">X</span>
+          Econom<span className="xLogo">𝕏</span>
         </div>
 
-        <div className="subtitle">
+        <div className="sub">
           Global Economic Intelligence
         </div>
 
@@ -482,14 +468,22 @@ export default function Home() {
         </button>
 
         <div className="clockBox">
-          <div>LIVE ●</div>
+          <div className="live">
+            LIVE ●
+          </div>
+
           <div>GMT: {gmtTime}</div>
+
           <div>Malta: {maltaTime}</div>
         </div>
 
       </div>
 
+      {/* MAIN */}
+
       <div className="main">
+
+        {/* DASHBOARD */}
 
         {page === "dashboard" && (
           <>
@@ -507,7 +501,7 @@ export default function Home() {
               {countries.map((country, index) => (
                 <div
                   key={index}
-                  className="countryPoint"
+                  className="countryWrapper"
                   style={{
                     left: country.x,
                     top: country.y,
@@ -515,45 +509,12 @@ export default function Home() {
                   onClick={() =>
                     setSelectedCountry(country)
                   }
-                />
-              ))}
-
-            </div>
-          </>
-        )}
-
-        {page === "markets" && (
-          <>
-            <h1 className="title">
-              Global Markets
-            </h1>
-
-            <div className="marketGrid">
-
-              {marketData.map((item, index) => (
-                <div
-                  className="marketCard"
-                  key={index}
                 >
-                  <div className="marketTop">
-                    <div>
-                      <h2>{item.name}</h2>
-                    </div>
+                  <div className="countryDot" />
 
-                    <div
-                      className={
-                        item.positive
-                          ? "green"
-                          : "red"
-                      }
-                    >
-                      {item.change}
-                    </div>
+                  <div className="countryName">
+                    {country.short}
                   </div>
-
-                  <h1>{item.value}</h1>
-
-                  {renderSpike(item.positive)}
                 </div>
               ))}
 
@@ -561,29 +522,156 @@ export default function Home() {
           </>
         )}
 
+        {/* MARKETS */}
+
+        {page === "markets" && (
+          <>
+            <h1 className="title">
+              Markets
+            </h1>
+
+            <div className="categoryTitle">
+              Companies
+            </div>
+
+            <div className="marketGrid">
+
+              {marketData
+                .filter(
+                  (x) =>
+                    x.category === "Companies"
+                )
+                .map((item, index) => (
+                  <div
+                    className="marketCard"
+                    key={index}
+                    onClick={() =>
+                      setSelectedMarket(item)
+                    }
+                  >
+                    <div className="marketTop">
+                      <div>
+                        <h2>
+                          {item.logo} {item.name}
+                        </h2>
+                      </div>
+
+                      <div
+                        className={
+                          item.change.includes("-")
+                            ? "red"
+                            : "green"
+                        }
+                      >
+                        {item.change}
+                      </div>
+                    </div>
+
+                    <h1>${item.value}</h1>
+
+                    {renderSpike(
+                      !item.change.includes("-")
+                    )}
+                  </div>
+                ))}
+
+            </div>
+
+            <div className="categoryTitle">
+              Crypto
+            </div>
+
+            <div className="marketGrid">
+
+              {marketData
+                .filter(
+                  (x) =>
+                    x.category === "Crypto"
+                )
+                .map((item, index) => (
+                  <div
+                    className="marketCard"
+                    key={index}
+                    onClick={() =>
+                      setSelectedMarket(item)
+                    }
+                  >
+                    <div className="marketTop">
+                      <div>
+                        <h2>
+                          {item.logo} {item.name}
+                        </h2>
+                      </div>
+
+                      <div
+                        className={
+                          item.change.includes("-")
+                            ? "red"
+                            : "green"
+                        }
+                      >
+                        {item.change}
+                      </div>
+                    </div>
+
+                    <h1>${item.value}</h1>
+
+                    {renderSpike(
+                      !item.change.includes("-")
+                    )}
+                  </div>
+                ))}
+
+            </div>
+
+          </>
+        )}
+
+        {/* NEWS */}
+
         {page === "news" && (
           <>
             <h1 className="title">
               Global News
             </h1>
 
+            <div className="categoryTitle">
+              Science
+            </div>
+
             <div className="newsGrid">
 
               <a
-                href="https://www.reuters.com/world/"
+                href="https://www.spacex.com/"
                 target="_blank"
                 className="newsCard"
               >
-                Ukraine War Latest Updates
+                Starship Flight 12 Launch
               </a>
 
+            </div>
+
+            <div className="categoryTitle">
+              Politics
+            </div>
+
+            <div className="newsGrid">
+
               <a
-                href="https://www.space.com/"
+                href="https://www.reuters.com/world/us/"
                 target="_blank"
                 className="newsCard"
               >
-                SpaceX Flight 12 Launch
+                Trump Economic Policies
               </a>
+
+            </div>
+
+            <div className="categoryTitle">
+              Finance
+            </div>
+
+            <div className="newsGrid">
 
               <a
                 href="https://www.cnbc.com/world/"
@@ -593,25 +681,28 @@ export default function Home() {
                 Global Markets Rally
               </a>
 
-              <a
-                href="https://www.bbc.com/news"
-                target="_blank"
-                className="newsCard"
-              >
-                AI and Technology Expansion
-              </a>
+            </div>
+
+            <div className="categoryTitle">
+              Technology
+            </div>
+
+            <div className="newsGrid">
 
               <a
-                href="https://www.aljazeera.com/"
+                href="https://www.bbc.com/news/technology"
                 target="_blank"
                 className="newsCard"
               >
-                Middle East Developments
+                AI Industry Expansion
               </a>
 
             </div>
+
           </>
         )}
+
+        {/* TRADE BLOCS */}
 
         {page === "tradeblocs" && (
           <>
@@ -621,31 +712,21 @@ export default function Home() {
 
             <div className="blocGrid">
 
-              <div className="blocCard">
-                <h2>European Union</h2>
-                <p>27 Member States</p>
-              </div>
+              {blocs.map((bloc, index) => (
+                <div
+                  className="blocCard"
+                  key={index}
+                  onClick={() =>
+                    setSelectedBloc(bloc)
+                  }
+                >
+                  <h2>
+                    {bloc.logo} {bloc.name}
+                  </h2>
 
-              <div className="blocCard">
-                <h2>BRICS</h2>
-                <p>
-                  Brazil, Russia, India,
-                  China, South Africa
-                </p>
-              </div>
-
-              <div className="blocCard">
-                <h2>ASEAN</h2>
-                <p>10 Southeast Asian states</p>
-              </div>
-
-              <div className="blocCard">
-                <h2>EFTA</h2>
-                <p>
-                  Norway, Switzerland,
-                  Iceland, Liechtenstein
-                </p>
-              </div>
+                  <p>{bloc.members}</p>
+                </div>
+              ))}
 
             </div>
           </>
@@ -653,86 +734,129 @@ export default function Home() {
 
       </div>
 
+      {/* COUNTRY PANEL */}
+
       {selectedCountry && (
-        <div className="countryPanel">
+        <div className="popup">
 
-          <div className="panelTop">
+          <h1>
+            {selectedCountry.flag}{" "}
+            {selectedCountry.name}
+          </h1>
 
-            <h1>
-              {selectedCountry.flag}{" "}
-              {selectedCountry.name}
-            </h1>
+          <p>
+            GDP: {selectedCountry.gdp}
+          </p>
 
-            <button
-              onClick={() =>
-                setSelectedCountry(null)
-              }
-            >
-              ✕
-            </button>
+          <p>
+            Currency:
+            {selectedCountry.currency}
+          </p>
 
-          </div>
+          <p>
+            Leader:
+            {selectedCountry.leader}
+          </p>
 
-          <div className="panelInfo">
+          <p>
+            Capital:
+            {selectedCountry.capital}
+          </p>
 
-            <p>
-              <strong>GDP:</strong>{" "}
-              {selectedCountry.gdp}
-            </p>
+          <p>
+            Population:
+            {selectedCountry.population}
+          </p>
 
-            <p>
-              <strong>Currency:</strong>{" "}
-              {selectedCountry.currency}
-            </p>
+          <p>
+            Bloc: {selectedCountry.bloc}
+          </p>
 
-            <p>
-              <strong>Leader:</strong>{" "}
-              {selectedCountry.leader}
-            </p>
+          <button
+            onClick={() =>
+              setSelectedCountry(null)
+            }
+          >
+            Close
+          </button>
 
-            <p>
-              <strong>Capital:</strong>{" "}
-              {selectedCountry.capital}
-            </p>
+        </div>
+      )}
 
-            <p>
-              <strong>Population:</strong>{" "}
-              {selectedCountry.population}
-            </p>
+      {/* MARKET PANEL */}
 
-            <p>
-              <strong>Exports:</strong>{" "}
-              {selectedCountry.exports}
-            </p>
+      {selectedMarket && (
+        <div className="popup">
 
-            <p>
-              <strong>Imports:</strong>{" "}
-              {selectedCountry.imports}
-            </p>
+          <h1>
+            {selectedMarket.logo}{" "}
+            {selectedMarket.name}
+          </h1>
 
-            <p>
-              <strong>Trade Bloc:</strong>{" "}
-              {selectedCountry.bloc}
-            </p>
+          <p>
+            Category:
+            {selectedMarket.category}
+          </p>
 
-            <p>
-              <strong>Conflict:</strong>{" "}
-              {selectedCountry.war}
-            </p>
+          <p>
+            Value:
+            {selectedMarket.value}
+          </p>
 
-          </div>
+          <p>
+            Change:
+            {selectedMarket.change}
+          </p>
+
+          <p>{selectedMarket.info}</p>
+
+          <button
+            onClick={() =>
+              setSelectedMarket(null)
+            }
+          >
+            Close
+          </button>
+
+        </div>
+      )}
+
+      {/* BLOC PANEL */}
+
+      {selectedBloc && (
+        <div className="popup">
+
+          <h1>
+            {selectedBloc.logo}{" "}
+            {selectedBloc.name}
+          </h1>
+
+          <p>{selectedBloc.members}</p>
+
+          <p>{selectedBloc.economy}</p>
+
+          <a
+            href={selectedBloc.wiki}
+            target="_blank"
+          >
+            Wikipedia
+          </a>
+
+          <button
+            onClick={() =>
+              setSelectedBloc(null)
+            }
+          >
+            Close
+          </button>
 
         </div>
       )}
 
       <style jsx>{`
-        * {
-          box-sizing: border-box;
-        }
-
         body {
           margin: 0;
-          background: black;
+          background: #000;
           color: white;
           font-family: Arial;
         }
@@ -741,46 +865,47 @@ export default function Home() {
           display: flex;
           background: black;
           min-height: 100vh;
+          color: white;
         }
 
         .sidebar {
           width: 260px;
-          background: #050505;
-          border-right: 1px solid #222;
           padding: 30px;
+          border-right: 1px solid #222;
           position: fixed;
           height: 100vh;
+          background: #030303;
         }
 
         .logo {
           font-size: 42px;
           font-weight: bold;
           cursor: pointer;
+          color: white;
         }
 
         .xLogo {
           font-style: italic;
-          margin-left: 2px;
         }
 
-        .subtitle {
-          color: #bbb;
+        .sub {
+          color: white;
           margin-top: 8px;
         }
 
         .byLuke {
-          color: #666;
+          color: #aaa;
           margin-top: 10px;
           margin-bottom: 40px;
         }
 
         .sidebar button {
           width: 100%;
-          margin-bottom: 14px;
           padding: 14px;
-          background: #0b0b0b;
-          color: white;
+          margin-bottom: 14px;
+          background: #0a0a0a;
           border: 1px solid #222;
+          color: white;
           border-radius: 14px;
           cursor: pointer;
           transition: 0.3s;
@@ -789,106 +914,97 @@ export default function Home() {
         .sidebar button:hover {
           background: white;
           color: black;
-          transform: translateX(4px);
         }
 
         .clockBox {
-          margin-top: 40px;
-          border: 1px solid #222;
+          margin-top: 30px;
           padding: 18px;
+          border: 1px solid #222;
           border-radius: 18px;
-          background: #090909;
+        }
+
+        .live {
+          color: #00ff99;
+          margin-bottom: 10px;
         }
 
         .main {
           margin-left: 260px;
           width: 100%;
           padding: 40px;
+          color: white;
         }
 
         .title {
           font-size: 52px;
           margin-bottom: 30px;
+          color: white;
         }
 
         .mapContainer {
           position: relative;
-          width: 100%;
-          overflow: hidden;
-          border-radius: 24px;
+          overflow: auto;
           border: 1px solid #222;
+          border-radius: 24px;
         }
 
         .map {
-          width: 100%;
-          filter: brightness(1.15);
+          width: 1600px;
+          filter: brightness(1.2);
         }
 
-        .countryPoint {
+        .countryWrapper {
           position: absolute;
+          cursor: pointer;
+          transition: 0.3s;
+        }
+
+        .countryWrapper:hover {
+          transform: scale(1.1);
+        }
+
+        .countryDot {
           width: 14px;
           height: 14px;
           border-radius: 50%;
           background: white;
-          cursor: pointer;
-          transition: 0.2s;
         }
 
-        .countryPoint:hover {
-          transform: scale(1.7);
-          background: #00ffcc;
-        }
-
-        .countryPanel {
-          position: fixed;
-          right: 30px;
-          top: 40px;
-          width: 340px;
-          background: #090909;
-          border: 1px solid #333;
-          border-radius: 24px;
-          padding: 24px;
-          animation: fade 0.3s ease;
-        }
-
-        .panelTop {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        .panelTop button {
-          background: none;
-          border: none;
+        .countryName {
+          font-size: 11px;
           color: white;
-          font-size: 22px;
-          cursor: pointer;
+          margin-top: 4px;
         }
 
-        .panelInfo p {
-          margin-top: 14px;
-          color: #ccc;
-        }
-
-        .marketGrid {
+        .marketGrid,
+        .blocGrid,
+        .newsGrid {
           display: grid;
           grid-template-columns: repeat(
             auto-fit,
             minmax(280px, 1fr)
           );
           gap: 20px;
+          margin-bottom: 30px;
         }
 
-        .marketCard {
+        .marketCard,
+        .blocCard,
+        .newsCard {
           background: #090909;
           border: 1px solid #222;
-          border-radius: 22px;
-          padding: 24px;
+          border-radius: 20px;
+          padding: 20px;
           transition: 0.3s;
+          cursor: pointer;
+          color: white;
+          text-decoration: none;
         }
 
-        .marketCard:hover {
-          transform: translateY(-6px);
+        .marketCard:hover,
+        .blocCard:hover,
+        .newsCard:hover {
+          transform: translateY(-5px);
           border-color: white;
         }
 
@@ -902,34 +1018,40 @@ export default function Home() {
         }
 
         .red {
-          color: #ff4444;
+          color: #ff5555;
         }
 
-        .newsGrid,
-        .blocGrid {
-          display: grid;
-          grid-template-columns: repeat(
-            auto-fit,
-            minmax(280px, 1fr)
-          );
-          gap: 20px;
-        }
-
-        .newsCard,
-        .blocCard {
-          background: #090909;
-          border: 1px solid #222;
+        .popup {
+          position: fixed;
+          right: 30px;
+          top: 40px;
+          width: 340px;
+          background: #050505;
+          border: 1px solid #333;
           border-radius: 22px;
           padding: 24px;
-          text-decoration: none;
-          color: white;
-          transition: 0.3s;
+          animation: fade 0.3s ease;
+          z-index: 1000;
         }
 
-        .newsCard:hover,
-        .blocCard:hover {
-          transform: translateY(-6px);
-          border-color: white;
+        .popup button {
+          margin-top: 20px;
+          padding: 10px 18px;
+          border-radius: 12px;
+          border: none;
+          background: white;
+          cursor: pointer;
+        }
+
+        .popup a {
+          color: #00ccff;
+        }
+
+        .categoryTitle {
+          font-size: 28px;
+          margin-top: 40px;
+          margin-bottom: 20px;
+          color: white;
         }
 
         @keyframes fade {
