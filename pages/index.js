@@ -1,15 +1,14 @@
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const [page, setPage] = useState("dashboard");
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [selectedMarket, setSelectedMarket] = useState(null);
   const [gmtTime, setGmtTime] = useState("");
   const [maltaTime, setMaltaTime] = useState("");
 
   useEffect(() => {
-    const updateClock = () => {
+    const update = () => {
       const now = new Date();
 
       setGmtTime(
@@ -25,196 +24,161 @@ export default function Home() {
       );
     };
 
-    updateClock();
+    update();
 
-    const interval = setInterval(updateClock, 1000);
+    const interval = setInterval(update, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
   const countries = {
     usa: {
-      name: "United States 🇺🇸",
+      flag: "🇺🇸",
+      name: "United States",
       capital: "Washington D.C.",
-      gdpUsd: "$29.1T",
-      gdpEur: "€26.8T",
-      exports: "Technology, Oil, Aircraft",
+      population: "341M",
+      currency: "US Dollar",
+      gdp: "$29.1 Trillion",
+      exports: "Technology, Aircraft, Oil",
+      imports: "Machinery, Electronics",
+      leader: "President",
       bloc: "USMCA",
-      inflation: "3.0%"
+      war: "No direct war",
+      wiki: "https://en.wikipedia.org/wiki/United_States"
     },
 
     germany: {
-      name: "Germany 🇩🇪",
+      flag: "🇩🇪",
+      name: "Germany",
       capital: "Berlin",
-      gdpUsd: "$4.9T",
-      gdpEur: "€4.5T",
-      exports: "Cars, Machinery, Chemicals",
+      population: "84M",
+      currency: "Euro",
+      gdp: "$4.9 Trillion",
+      exports: "Cars, Chemicals",
+      imports: "Energy, Electronics",
+      leader: "Chancellor",
       bloc: "EU / EEA",
-      inflation: "2.4%"
-    },
-
-    malta: {
-      name: "Malta 🇲🇹",
-      capital: "Valletta",
-      gdpUsd: "$25B",
-      gdpEur: "€23B",
-      exports: "Services, Electronics",
-      bloc: "EU / Eurozone",
-      inflation: "2.1%"
+      war: "No direct war",
+      wiki: "https://en.wikipedia.org/wiki/Germany"
     },
 
     china: {
-      name: "China 🇨🇳",
+      flag: "🇨🇳",
+      name: "China",
       capital: "Beijing",
-      gdpUsd: "$18.5T",
-      gdpEur: "€17.0T",
+      population: "1.4B",
+      currency: "Yuan",
+      gdp: "$18.5 Trillion",
       exports: "Electronics, Steel",
+      imports: "Oil, Semiconductors",
+      leader: "President",
       bloc: "BRICS",
-      inflation: "0.8%"
+      war: "No active war",
+      wiki: "https://en.wikipedia.org/wiki/China"
     },
 
     india: {
-      name: "India 🇮🇳",
+      flag: "🇮🇳",
+      name: "India",
       capital: "New Delhi",
-      gdpUsd: "$4.1T",
-      gdpEur: "€3.8T",
+      population: "1.45B",
+      currency: "Indian Rupee",
+      gdp: "$4.1 Trillion",
       exports: "IT Services, Pharmaceuticals",
+      imports: "Oil, Electronics",
+      leader: "Prime Minister",
       bloc: "BRICS",
-      inflation: "4.8%"
+      war: "Regional tensions",
+      wiki: "https://en.wikipedia.org/wiki/India"
     },
 
-    japan: {
-      name: "Japan 🇯🇵",
-      capital: "Tokyo",
-      gdpUsd: "$4.3T",
-      gdpEur: "€3.9T",
-      exports: "Cars, Robotics",
-      bloc: "APAC",
-      inflation: "2.2%"
+    malta: {
+      flag: "🇲🇹",
+      name: "Malta",
+      capital: "Valletta",
+      population: "560K",
+      currency: "Euro",
+      gdp: "$25 Billion",
+      exports: "Services, Electronics",
+      imports: "Fuel, Machinery",
+      leader: "Prime Minister",
+      bloc: "EU / Eurozone",
+      war: "None",
+      wiki: "https://en.wikipedia.org/wiki/Malta"
     }
   };
 
   const companies = [
-    {
-      name: "Apple",
-      value: "$3.2T",
-      change: "+2.4%",
-      desc: "Consumer electronics and software giant.",
-      wiki: "https://en.wikipedia.org/wiki/Apple_Inc."
-    },
-
-    {
-      name: "Microsoft",
-      value: "$3.1T",
-      change: "+1.8%",
-      desc: "Cloud computing and operating systems leader.",
-      wiki: "https://en.wikipedia.org/wiki/Microsoft"
-    },
-
-    {
-      name: "NVIDIA",
-      value: "$2.8T",
-      change: "+5.1%",
-      desc: "AI and GPU market leader.",
-      wiki: "https://en.wikipedia.org/wiki/Nvidia"
-    },
-
-    {
-      name: "Tesla",
-      value: "$790B",
-      change: "-3.2%",
-      desc: "Electric vehicle and energy company.",
-      wiki: "https://en.wikipedia.org/wiki/Tesla,_Inc."
-    }
+    ["Apple", "$3.2T", "+2.3%"],
+    ["Microsoft", "$3.1T", "+1.8%"],
+    ["NVIDIA", "$2.8T", "+5.4%"],
+    ["Amazon", "$2.1T", "+1.5%"],
+    ["Google", "$2.0T", "+1.2%"],
+    ["Meta", "$1.4T", "+2.0%"],
+    ["Tesla", "$780B", "-3.1%"],
+    ["Samsung", "$490B", "+0.8%"],
+    ["BYD", "$140B", "+4.2%"],
+    ["ExxonMobil", "$530B", "+1.0%"]
   ];
 
   const cryptos = [
-    {
-      name: "Bitcoin",
-      value: "$108,000",
-      change: "+4.2%",
-      wiki: "https://en.wikipedia.org/wiki/Bitcoin"
-    },
-
-    {
-      name: "Ethereum",
-      value: "$5,200",
-      change: "+3.1%",
-      wiki: "https://en.wikipedia.org/wiki/Ethereum"
-    },
-
-    {
-      name: "Solana",
-      value: "$240",
-      change: "+8.5%",
-      wiki: "https://en.wikipedia.org/wiki/Solana_(blockchain_platform)"
-    }
+    ["Bitcoin", "$108,000", "+4.1%"],
+    ["Ethereum", "$5,200", "+3.0%"],
+    ["Solana", "$240", "+8.0%"],
+    ["BNB", "$910", "+2.2%"],
+    ["XRP", "$2.90", "+5.0%"],
+    ["Cardano", "$1.50", "+1.2%"],
+    ["Dogecoin", "$0.45", "-1.0%"],
+    ["Avalanche", "$92", "+3.3%"],
+    ["Chainlink", "$48", "+2.9%"],
+    ["Toncoin", "$11", "+4.0%"]
   ];
 
   const oil = [
-    {
-      name: "Brent Oil",
-      value: "$82.15",
-      change: "+1.5%",
-      wiki: "https://en.wikipedia.org/wiki/Brent_Crude"
-    },
-
-    {
-      name: "WTI Crude",
-      value: "$79.80",
-      change: "+1.1%",
-      wiki: "https://en.wikipedia.org/wiki/West_Texas_Intermediate"
-    },
-
-    {
-      name: "Saudi Aramco",
-      value: "$2.1T",
-      change: "+0.9%",
-      wiki: "https://en.wikipedia.org/wiki/Saudi_Aramco"
-    }
+    ["Brent Oil", "$82", "+1.5%"],
+    ["WTI Crude", "$79", "+1.2%"],
+    ["Saudi Aramco", "$2.1T", "+0.9%"],
+    ["Shell", "$220B", "+0.6%"],
+    ["BP", "$115B", "-0.3%"],
+    ["Chevron", "$310B", "+0.8%"],
+    ["TotalEnergies", "$170B", "+1.0%"]
   ];
 
-  const renderMarketCards = (data) => (
+  const renderCards = (items) => (
     <div style={styles.grid}>
-      {data.map((item, i) => (
-        <div
-          key={i}
-          style={styles.card}
-          onClick={() => setSelectedMarket(item)}
-        >
-          <h3>{item.name}</h3>
+      {items.map((item, i) => (
+        <div key={i} style={styles.card}>
+          <h2>{item[0]}</h2>
 
-          <p style={styles.value}>{item.value}</p>
+          <h1>{item[1]}</h1>
 
           <p
             style={{
               color:
-                item.change[0] === "+"
+                item[2][0] === "+"
                   ? "#00ff88"
                   : "#ff5555"
             }}
           >
-            {item.change}
+            {item[2]}
           </p>
 
-          <div style={styles.chart}>
-            <svg width="100%" height="60">
-              <polyline
-                fill="none"
-                stroke={
-                  item.change[0] === "+"
-                    ? "#00ff88"
-                    : "#ff5555"
-                }
-                strokeWidth="3"
-                points="0,50 20,40 40,45 60,20 80,30 100,10 120,15 140,5"
-              />
-            </svg>
-          </div>
-
-          <p style={{ color: "#777", marginTop: "10px" }}>
-            Market movement since April 2026.
-          </p>
+          <svg width="100%" height="60">
+            <polyline
+              fill="none"
+              stroke={
+                item[2][0] === "+"
+                  ? "#00ff88"
+                  : "#ff5555"
+              }
+              strokeWidth="3"
+              points={
+                item[2][0] === "+"
+                  ? "0,50 20,35 40,45 60,18 80,28 100,10 120,18 140,5"
+                  : "0,10 20,18 40,15 60,30 80,25 100,40 120,45 140,52"
+              }
+            />
+          </svg>
         </div>
       ))}
     </div>
@@ -227,7 +191,7 @@ export default function Home() {
           style={styles.logo}
           onClick={() => setPage("dashboard")}
         >
-          Econom𝕏
+          <span style={styles.logoE}>E</span>conom𝕏
         </div>
 
         <p style={styles.credit}>
@@ -235,220 +199,146 @@ export default function Home() {
         </p>
 
         <div style={styles.menu}>
-          {[
-            "dashboard",
-            "companies",
-            "crypto",
-            "oil"
-          ].map((p) => (
-            <div
-              key={p}
-              style={{
-                ...styles.navItem,
-                background:
-                  page === p
-                    ? "#1a1a1a"
-                    : "transparent"
-              }}
-              onClick={() => setPage(p)}
-            >
-              {p.toUpperCase()}
-            </div>
-          ))}
+          <button style={styles.button} onClick={() => setPage("dashboard")}>
+            Dashboard
+          </button>
+
+          <button style={styles.button} onClick={() => setPage("companies")}>
+            Companies
+          </button>
+
+          <button style={styles.button} onClick={() => setPage("crypto")}>
+            Crypto
+          </button>
+
+          <button style={styles.button} onClick={() => setPage("oil")}>
+            Oil
+          </button>
+
+          <button style={styles.button} onClick={() => setPage("news")}>
+            News
+          </button>
         </div>
 
-        <div style={styles.sidePanel}>
-          <h3>Trade Blocs</h3>
-
-          <button style={styles.blocButton}>EU</button>
-          <button style={styles.blocButton}>BRICS</button>
-          <button style={styles.blocButton}>ASEAN</button>
-          <button style={styles.blocButton}>EFTA</button>
-          <button style={styles.blocButton}>EEA</button>
-          <button style={styles.blocButton}>MERCOSUR</button>
+        <div style={styles.clockBox}>
+          <h3>GMT / UTC</h3>
+          <h2>{gmtTime}</h2>
         </div>
 
-        <div style={styles.clockPanel}>
-          <div style={styles.clockCard}>
-            <p>GMT / UTC</p>
-            <h2>{gmtTime}</h2>
-          </div>
-
-          <div style={styles.clockCard}>
-            <p>Malta Time 🇲🇹</p>
-            <h2>{maltaTime}</h2>
-          </div>
+        <div style={styles.clockBox}>
+          <h3>Malta Time 🇲🇹</h3>
+          <h2>{maltaTime}</h2>
         </div>
       </aside>
 
       <main style={styles.main}>
-        <div style={styles.topbar}>
-          <div>
-            <h1>Global Economic Intelligence System</h1>
-
-            <p style={{ color: "#777" }}>
-              April 2026 Economic Monitoring Dashboard
-            </p>
-          </div>
-
-          <div style={styles.live}>
-            ● LIVE
-          </div>
-        </div>
-
         {page === "dashboard" && (
           <>
+            <div style={styles.header}>
+              <div>
+                <h1>Global Economic Dashboard</h1>
+                <p style={{ color: "#888" }}>
+                  May 2026 Economic Intelligence
+                </p>
+              </div>
+
+              <div style={styles.live}>● LIVE</div>
+            </div>
+
             <div style={styles.mapContainer}>
-              <h2>🌍 Interactive Mercator Projection</h2>
-
-              <svg
-                viewBox="0 0 1000 500"
-                style={styles.svgMap}
-              >
-                <rect width="1000" height="500" fill="#050505" />
-
-                <rect
-                  x="120"
-                  y="150"
-                  width="180"
-                  height="90"
-                  fill="#111"
-                  stroke="white"
-                  onClick={() =>
-                    setSelectedCountry(countries.usa)
-                  }
+              <svg viewBox="0 0 1000 500" style={styles.map}>
+                <image
+                  href="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg"
+                  x="0"
+                  y="0"
+                  width="1000"
+                  height="500"
+                  opacity="0.9"
                 />
 
-                <rect
-                  x="470"
-                  y="130"
-                  width="90"
-                  height="60"
-                  fill="#111"
-                  stroke="white"
-                  onClick={() =>
-                    setSelectedCountry(countries.germany)
-                  }
-                />
+                <circle cx="180" cy="160" r="18" fill="#ffffff22"
+                  onMouseEnter={() => setSelectedCountry(countries.usa)} />
 
-                <rect
-                  x="505"
-                  y="190"
-                  width="35"
-                  height="20"
-                  fill="#111"
-                  stroke="white"
-                  onClick={() =>
-                    setSelectedCountry(countries.malta)
-                  }
-                />
+                <circle cx="505" cy="145" r="10" fill="#ffffff22"
+                  onMouseEnter={() => setSelectedCountry(countries.germany)} />
 
-                <rect
-                  x="670"
-                  y="170"
-                  width="170"
-                  height="100"
-                  fill="#111"
-                  stroke="white"
-                  onClick={() =>
-                    setSelectedCountry(countries.china)
-                  }
-                />
+                <circle cx="760" cy="200" r="16" fill="#ffffff22"
+                  onMouseEnter={() => setSelectedCountry(countries.china)} />
 
-                <rect
-                  x="640"
-                  y="270"
-                  width="100"
-                  height="70"
-                  fill="#111"
-                  stroke="white"
-                  onClick={() =>
-                    setSelectedCountry(countries.india)
-                  }
-                />
+                <circle cx="700" cy="260" r="14" fill="#ffffff22"
+                  onMouseEnter={() => setSelectedCountry(countries.india)} />
 
-                <rect
-                  x="860"
-                  y="180"
-                  width="50"
-                  height="60"
-                  fill="#111"
-                  stroke="white"
-                  onClick={() =>
-                    setSelectedCountry(countries.japan)
-                  }
-                />
+                <circle cx="520" cy="210" r="6" fill="#ffffff22"
+                  onMouseEnter={() => setSelectedCountry(countries.malta)} />
               </svg>
             </div>
 
             {selectedCountry && (
               <div style={styles.countryPanel}>
-                <h2>{selectedCountry.name}</h2>
+                <h1>
+                  {selectedCountry.flag} {selectedCountry.name}
+                </h1>
 
-                <div style={styles.infoRow}>
-                  <span>Capital</span>
-                  <span>{selectedCountry.capital}</span>
+                <div style={styles.infoGrid}>
+                  <div>Capital: {selectedCountry.capital}</div>
+                  <div>Population: {selectedCountry.population}</div>
+                  <div>Currency: {selectedCountry.currency}</div>
+                  <div>GDP: {selectedCountry.gdp}</div>
+                  <div>Exports: {selectedCountry.exports}</div>
+                  <div>Imports: {selectedCountry.imports}</div>
+                  <div>Leader: {selectedCountry.leader}</div>
+                  <div>Trade Bloc: {selectedCountry.bloc}</div>
+                  <div>Conflict Status: {selectedCountry.war}</div>
                 </div>
 
-                <div style={styles.infoRow}>
-                  <span>GDP (USD)</span>
-                  <span>{selectedCountry.gdpUsd}</span>
-                </div>
-
-                <div style={styles.infoRow}>
-                  <span>GDP (EUR)</span>
-                  <span>{selectedCountry.gdpEur}</span>
-                </div>
-
-                <div style={styles.infoRow}>
-                  <span>Main Exports</span>
-                  <span>{selectedCountry.exports}</span>
-                </div>
-
-                <div style={styles.infoRow}>
-                  <span>Trade Bloc</span>
-                  <span>{selectedCountry.bloc}</span>
-                </div>
-
-                <div style={styles.infoRow}>
-                  <span>Inflation</span>
-                  <span>{selectedCountry.inflation}</span>
-                </div>
+                <a
+                  href={selectedCountry.wiki}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={styles.link}
+                >
+                  Open Wikipedia
+                </a>
               </div>
             )}
           </>
         )}
 
-        {page === "companies" && renderMarketCards(companies)}
+        {page === "companies" && renderCards(companies)}
 
-        {page === "crypto" && renderMarketCards(cryptos)}
+        {page === "crypto" && renderCards(cryptos)}
 
-        {page === "oil" && renderMarketCards(oil)}
+        {page === "oil" && renderCards(oil)}
 
-        {selectedMarket && (
-          <div style={styles.marketPanel}>
-            <h2>{selectedMarket.name}</h2>
+        {page === "news" && (
+          <div style={styles.newsGrid}>
+            <div style={styles.newsCard}>
+              <h2>Politics</h2>
+              <a href="https://en.wikipedia.org/wiki/Russo-Ukrainian_War" target="_blank" rel="noreferrer" style={styles.link}>
+                Ukraine War Developments
+              </a>
+            </div>
 
-            <p style={{ marginTop: "15px" }}>
-              {selectedMarket.desc ||
-                "Global market intelligence asset."}
-            </p>
+            <div style={styles.newsCard}>
+              <h2>Finance</h2>
+              <a href="https://en.wikipedia.org/wiki/Nasdaq" target="_blank" rel="noreferrer" style={styles.link}>
+                NASDAQ Hits New Highs
+              </a>
+            </div>
 
-            <p style={{ marginTop: "15px" }}>
-              Value: {selectedMarket.value}
-            </p>
+            <div style={styles.newsCard}>
+              <h2>Science</h2>
+              <a href="https://en.wikipedia.org/wiki/SpaceX" target="_blank" rel="noreferrer" style={styles.link}>
+                SpaceX Expansion
+              </a>
+            </div>
 
-            <p>
-              Movement: {selectedMarket.change}
-            </p>
-
-            <a
-              href={selectedMarket.wiki}
-              target="_blank"
-              style={styles.link}
-            >
-              Open Wikipedia Article
-            </a>
+            <div style={styles.newsCard}>
+              <h2>Technology</h2>
+              <a href="https://en.wikipedia.org/wiki/Artificial_intelligence" target="_blank" rel="noreferrer" style={styles.link}>
+                AI Market Growth
+              </a>
+            </div>
           </div>
         )}
       </main>
@@ -459,28 +349,34 @@ export default function Home() {
 const styles = {
   container: {
     display: "flex",
+    minHeight: "100vh",
     background: "#000",
     color: "white",
-    minHeight: "100vh",
     fontFamily: "Arial"
   },
 
   sidebar: {
     width: "280px",
-    background: "#050505",
-    borderRight: "1px solid #1f1f1f",
+    background: "linear-gradient(to bottom,#0a0a0a,#050505)",
+    borderRight: "1px solid #222",
     padding: "30px"
   },
 
   logo: {
-    fontSize: "42px",
+    fontSize: "40px",
     fontWeight: "bold",
     cursor: "pointer"
   },
 
+  logoE: {
+    border: "2px solid white",
+    padding: "2px 8px",
+    marginRight: "2px"
+  },
+
   credit: {
-    color: "#777",
-    marginBottom: "40px"
+    color: "#888",
+    marginBottom: "30px"
   },
 
   menu: {
@@ -489,55 +385,33 @@ const styles = {
     gap: "12px"
   },
 
-  navItem: {
-    padding: "14px",
-    borderRadius: "14px",
-    cursor: "pointer",
-    transition: "all 0.25s ease",
-    border: "1px solid #151515"
-  },
-
-  sidePanel: {
-    marginTop: "40px",
-    background: "#0d0d0d",
-    border: "1px solid #1f1f1f",
-    borderRadius: "16px",
-    padding: "18px"
-  },
-
-  blocButton: {
-    width: "100%",
-    marginTop: "10px",
+  button: {
     background: "#111",
     color: "white",
     border: "1px solid #222",
-    padding: "10px",
-    borderRadius: "12px",
+    padding: "14px",
+    borderRadius: "14px",
     cursor: "pointer"
   },
 
-  clockPanel: {
-    marginTop: "40px"
-  },
-
-  clockCard: {
+  clockBox: {
+    marginTop: "25px",
     background: "#111",
     border: "1px solid #222",
     borderRadius: "14px",
-    padding: "15px",
-    marginBottom: "15px"
+    padding: "15px"
   },
 
   main: {
     flex: 1,
-    padding: "35px"
+    padding: "30px"
   },
 
-  topbar: {
+  header: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: "35px"
+    marginBottom: "25px"
   },
 
   live: {
@@ -546,47 +420,36 @@ const styles = {
   },
 
   mapContainer: {
-    background: "#0b0b0b",
+    background: "#080808",
     border: "1px solid #222",
     borderRadius: "18px",
-    padding: "25px",
-    marginBottom: "30px"
+    padding: "20px"
   },
 
-  svgMap: {
+  map: {
     width: "100%",
-    marginTop: "20px",
     borderRadius: "16px"
   },
 
   countryPanel: {
-    background: "#0f0f0f",
-    border: "1px solid #222",
-    borderRadius: "18px",
-    padding: "25px",
-    marginBottom: "30px",
-    animation: "fadeIn 0.3s ease"
-  },
-
-  marketPanel: {
-    marginTop: "40px",
+    marginTop: "30px",
     background: "#0f0f0f",
     border: "1px solid #222",
     borderRadius: "18px",
     padding: "25px"
   },
 
-  infoRow: {
-    display: "flex",
-    justifyContent: "space-between",
-    marginTop: "14px",
+  infoGrid: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "12px",
+    marginTop: "20px",
     color: "#ccc"
   },
 
   grid: {
     display: "grid",
-    gridTemplateColumns:
-      "repeat(auto-fit,minmax(240px,1fr))",
+    gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
     gap: "20px"
   },
 
@@ -594,26 +457,26 @@ const styles = {
     background: "#101010",
     border: "1px solid #222",
     borderRadius: "18px",
-    padding: "20px",
-    transition: "all 0.25s ease",
-    cursor: "pointer"
+    padding: "20px"
   },
 
-  chart: {
-    marginTop: "15px"
+  newsGrid: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "20px"
   },
 
-  value: {
-    fontSize: "28px",
-    marginTop: "10px"
+  newsCard: {
+    background: "#111",
+    border: "1px solid #222",
+    borderRadius: "16px",
+    padding: "20px"
   },
 
   link: {
+    color: "#00bbff",
     display: "inline-block",
-    marginTop: "20px",
-    color: "#00bbff"
+    marginTop: "15px"
   }
 };
 
-
-  
