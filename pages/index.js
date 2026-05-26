@@ -613,12 +613,5 @@ const styles = {
     color: "#00bbff"
   }
 };
-```
 
-Then:
 
-1. Save the file
-2. Commit changes
-3. Push to GitHub
-4. Wait for Vercel deployment
-5. Refresh your Econom𝕏 site
