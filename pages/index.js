@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 
 export default function Home() {
@@ -31,355 +32,414 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
-  // =========================
+  // =====================
   // COUNTRIES
-  // =========================
+  // =====================
 
   const countries = [
     {
       name: "United States",
       short: "USA",
-      x: 190,
-      y: 220,
-      gdp: "$29.1T",
-      currency: "USD",
+      x: 13,
+      y: 36,
+      flag: "🇺🇸",
       leader: "Donald Trump",
       capital: "Washington D.C.",
-      population: "341M",
+      gdp: "$29.1 Trillion",
+      population: "341 Million",
+      currency: "US Dollar",
       bloc: "USMCA / NATO",
-      flag: "🇺🇸",
+      exports: "Aircraft, Tech, Oil",
+      imports: "Electronics, Cars",
+      inflation: "2.9%",
+      war: "No active war",
     },
 
     {
       name: "Canada",
       short: "Canada",
-      x: 190,
-      y: 140,
-      gdp: "$2.3T",
-      currency: "CAD",
+      x: 13,
+      y: 23,
+      flag: "🇨🇦",
       leader: "Mark Carney",
       capital: "Ottawa",
-      population: "41M",
+      gdp: "$2.3 Trillion",
+      population: "41 Million",
+      currency: "Canadian Dollar",
       bloc: "USMCA / NATO",
-      flag: "🇨🇦",
+      exports: "Oil, Lumber",
+      imports: "Cars",
+      inflation: "2.7%",
+      war: "No active war",
     },
 
     {
-      name: "Mexico",
-      short: "Mexico",
-      x: 220,
-      y: 280,
-      gdp: "$1.9T",
+      name: "Brazil",
+      short: "Brazil",
+      x: 22,
+      y: 67,
+      flag: "🇧🇷",
+      leader: "Lula da Silva",
+      capital: "Brasília",
+      gdp: "$2.4 Trillion",
+      population: "214 Million",
+      currency: "Real",
+      bloc: "MERCOSUR",
+      exports: "Soybeans, Iron",
+      imports: "Electronics",
+      inflation: "4.1%",
+      war: "No active war",
+    },
+
+    {
+      name: "Argentina",
+      short: "Argentina",
+      x: 24,
+      y: 83,
+      flag: "🇦🇷",
+      leader: "Javier Milei",
+      capital: "Buenos Aires",
+      gdp: "$690 Billion",
+      population: "46 Million",
       currency: "Peso",
-      leader: "Claudia Sheinbaum",
-      capital: "Mexico City",
-      population: "132M",
-      bloc: "USMCA",
-      flag: "🇲🇽",
+      bloc: "MERCOSUR",
+      exports: "Agriculture",
+      imports: "Machinery",
+      inflation: "122%",
+      war: "No active war",
     },
 
     {
       name: "United Kingdom",
       short: "UK",
-      x: 670,
-      y: 180,
-      gdp: "$3.8T",
-      currency: "Pound",
+      x: 42,
+      y: 26,
+      flag: "🇬🇧",
       leader: "Keir Starmer",
       capital: "London",
-      population: "69M",
+      gdp: "$3.8 Trillion",
+      population: "69 Million",
+      currency: "Pound Sterling",
       bloc: "NATO",
-      flag: "🇬🇧",
+      exports: "Finance",
+      imports: "Electronics",
+      inflation: "3.2%",
+      war: "No active war",
     },
 
     {
       name: "France",
       short: "France",
-      x: 720,
-      y: 220,
-      gdp: "$3.2T",
-      currency: "Euro",
+      x: 45,
+      y: 31,
+      flag: "🇫🇷",
       leader: "Emmanuel Macron",
       capital: "Paris",
-      population: "65M",
+      gdp: "$3.2 Trillion",
+      population: "65 Million",
+      currency: "Euro",
       bloc: "EU",
-      flag: "🇫🇷",
+      exports: "Aircraft",
+      imports: "Energy",
+      inflation: "2.8%",
+      war: "No active war",
     },
 
     {
       name: "Germany",
       short: "Germany",
-      x: 760,
-      y: 180,
-      gdp: "$4.9T",
-      currency: "Euro",
+      x: 48,
+      y: 28,
+      flag: "🇩🇪",
       leader: "Friedrich Merz",
       capital: "Berlin",
-      population: "84M",
+      gdp: "$4.9 Trillion",
+      population: "84 Million",
+      currency: "Euro",
       bloc: "EU",
-      flag: "🇩🇪",
+      exports: "Cars",
+      imports: "Oil",
+      inflation: "2.6%",
+      war: "No active war",
     },
 
     {
       name: "Italy",
       short: "Italy",
-      x: 780,
-      y: 250,
-      gdp: "$2.5T",
-      currency: "Euro",
+      x: 50,
+      y: 36,
+      flag: "🇮🇹",
       leader: "Giorgia Meloni",
       capital: "Rome",
-      population: "59M",
+      gdp: "$2.5 Trillion",
+      population: "59 Million",
+      currency: "Euro",
       bloc: "EU",
-      flag: "🇮🇹",
+      exports: "Luxury goods",
+      imports: "Energy",
+      inflation: "2.2%",
+      war: "No active war",
+    },
+
+    {
+      name: "Spain",
+      short: "Spain",
+      x: 43,
+      y: 38,
+      flag: "🇪🇸",
+      leader: "Pedro Sánchez",
+      capital: "Madrid",
+      gdp: "$1.9 Trillion",
+      population: "49 Million",
+      currency: "Euro",
+      bloc: "EU",
+      exports: "Tourism",
+      imports: "Oil",
+      inflation: "2.5%",
+      war: "No active war",
     },
 
     {
       name: "Malta",
       short: "Malta",
-      x: 820,
-      y: 300,
-      gdp: "$28B",
-      currency: "Euro",
+      x: 51,
+      y: 42,
+      flag: "🇲🇹",
       leader: "Robert Abela",
       capital: "Valletta",
-      population: "570K",
+      gdp: "$28 Billion",
+      population: "570 Thousand",
+      currency: "Euro",
       bloc: "EU",
-      flag: "🇲🇹",
+      exports: "Electronics",
+      imports: "Fuel",
+      inflation: "2.1%",
+      war: "No active war",
     },
 
     {
       name: "Russia",
       short: "Russia",
-      x: 980,
-      y: 120,
-      gdp: "$2.4T",
-      currency: "Ruble",
+      x: 61,
+      y: 20,
+      flag: "🇷🇺",
       leader: "Vladimir Putin",
       capital: "Moscow",
-      population: "144M",
+      gdp: "$2.4 Trillion",
+      population: "144 Million",
+      currency: "Ruble",
       bloc: "BRICS",
-      flag: "🇷🇺",
+      exports: "Oil & Gas",
+      imports: "Electronics",
+      inflation: "7.2%",
+      war: "Ukraine War",
     },
 
     {
       name: "China",
       short: "China",
-      x: 1220,
-      y: 240,
-      gdp: "$19.5T",
-      currency: "Yuan",
+      x: 76,
+      y: 37,
+      flag: "🇨🇳",
       leader: "Xi Jinping",
       capital: "Beijing",
-      population: "1.41B",
+      gdp: "$19.5 Trillion",
+      population: "1.41 Billion",
+      currency: "Yuan",
       bloc: "BRICS",
-      flag: "🇨🇳",
+      exports: "Electronics",
+      imports: "Oil",
+      inflation: "1.4%",
+      war: "No active war",
     },
 
     {
       name: "India",
       short: "India",
-      x: 1100,
-      y: 330,
-      gdp: "$4.3T",
-      currency: "Rupee",
+      x: 69,
+      y: 48,
+      flag: "🇮🇳",
       leader: "Narendra Modi",
       capital: "New Delhi",
-      population: "1.43B",
+      gdp: "$4.3 Trillion",
+      population: "1.43 Billion",
+      currency: "Rupee",
       bloc: "BRICS",
-      flag: "🇮🇳",
+      exports: "IT Services",
+      imports: "Oil",
+      inflation: "4.9%",
+      war: "No active war",
     },
 
     {
       name: "Japan",
       short: "Japan",
-      x: 1380,
-      y: 250,
-      gdp: "$4.5T",
-      currency: "Yen",
+      x: 86,
+      y: 36,
+      flag: "🇯🇵",
       leader: "Shigeru Ishiba",
       capital: "Tokyo",
-      population: "123M",
+      gdp: "$4.5 Trillion",
+      population: "123 Million",
+      currency: "Yen",
       bloc: "G7",
-      flag: "🇯🇵",
+      exports: "Cars",
+      imports: "Oil",
+      inflation: "2.1%",
+      war: "No active war",
     },
 
     {
-      name: "South Korea",
-      short: "Korea",
-      x: 1330,
-      y: 260,
-      gdp: "$1.9T",
-      currency: "Won",
-      leader: "Han Duck-soo",
-      capital: "Seoul",
-      population: "52M",
-      bloc: "OECD",
-      flag: "🇰🇷",
+      name: "South Africa",
+      short: "S. Africa",
+      x: 54,
+      y: 83,
+      flag: "🇿🇦",
+      leader: "Cyril Ramaphosa",
+      capital: "Pretoria",
+      gdp: "$420 Billion",
+      population: "62 Million",
+      currency: "Rand",
+      bloc: "BRICS",
+      exports: "Gold",
+      imports: "Machinery",
+      inflation: "5.3%",
+      war: "No active war",
     },
 
     {
-      name: "Indonesia",
-      short: "Indonesia",
-      x: 1220,
-      y: 470,
-      gdp: "$1.6T",
-      currency: "Rupiah",
-      leader: "Prabowo Subianto",
-      capital: "Jakarta",
-      population: "282M",
-      bloc: "ASEAN",
-      flag: "🇮🇩",
-    },
-
-    {
-      name: "Thailand",
-      short: "Thailand",
-      x: 1160,
-      y: 390,
-      gdp: "$620B",
-      currency: "Baht",
-      leader: "Srettha Thavisin",
-      capital: "Bangkok",
-      population: "71M",
-      bloc: "ASEAN",
-      flag: "🇹🇭",
-    },
-
-    {
-      name: "Singapore",
-      short: "Singapore",
-      x: 1180,
-      y: 460,
-      gdp: "$530B",
-      currency: "SGD",
-      leader: "Lawrence Wong",
-      capital: "Singapore",
-      population: "6M",
-      bloc: "ASEAN",
-      flag: "🇸🇬",
-    },
-
-    {
-      name: "Switzerland",
-      short: "Swiss",
-      x: 740,
-      y: 200,
-      gdp: "$980B",
-      currency: "CHF",
-      leader: "Viola Amherd",
-      capital: "Bern",
-      population: "9M",
-      bloc: "EFTA",
-      flag: "🇨🇭",
-    },
-
-    {
-      name: "Norway",
-      short: "Norway",
-      x: 760,
-      y: 90,
-      gdp: "$610B",
-      currency: "Krone",
-      leader: "Jonas Gahr Støre",
-      capital: "Oslo",
-      population: "5.5M",
-      bloc: "EFTA / EEA",
-      flag: "🇳🇴",
+      name: "Nigeria",
+      short: "Nigeria",
+      x: 48,
+      y: 60,
+      flag: "🇳🇬",
+      leader: "Bola Tinubu",
+      capital: "Abuja",
+      gdp: "$390 Billion",
+      population: "229 Million",
+      currency: "Naira",
+      bloc: "African Union",
+      exports: "Oil",
+      imports: "Machinery",
+      inflation: "31%",
+      war: "Insurgency",
     },
   ];
 
-  // =========================
-  // MARKETS
-  // =========================
+  // =====================
+  // MARKET DATA
+  // =====================
 
-  const [marketData, setMarketData] = useState([
+  const [markets, setMarkets] = useState([
     {
       name: "Apple",
-      category: "Companies",
-      value: 214.8,
-      change: "+1.4%",
       logo: "🍎",
-      info: "Largest tech company in the world.",
+      type: "Companies",
+      value: 214.2,
+      marketcap: "$3.2 Trillion",
+      change: "+1.4%",
+      description:
+        "Largest public technology company.",
     },
 
     {
       name: "Microsoft",
-      category: "Companies",
-      value: 468.2,
-      change: "+0.9%",
       logo: "🪟",
-      info: "Global software and cloud giant.",
+      type: "Companies",
+      value: 468.5,
+      marketcap: "$3.4 Trillion",
+      change: "+0.9%",
+      description:
+        "Cloud and software giant.",
+    },
+
+    {
+      name: "NVIDIA",
+      logo: "🟩",
+      type: "Companies",
+      value: 132.1,
+      marketcap: "$3.1 Trillion",
+      change: "+3.1%",
+      description:
+        "AI chip manufacturer.",
     },
 
     {
       name: "Bitcoin",
-      category: "Crypto",
-      value: 108100,
-      change: "+3.8%",
       logo: "₿",
-      info: "Largest cryptocurrency.",
+      type: "Crypto",
+      value: 108200,
+      marketcap: "$2.1 Trillion",
+      change: "+4.2%",
+      description:
+        "Largest cryptocurrency.",
     },
 
     {
       name: "Ethereum",
-      category: "Crypto",
-      value: 5210,
-      change: "+2.1%",
       logo: "◆",
-      info: "Smart contract blockchain.",
+      type: "Crypto",
+      value: 5210,
+      marketcap: "$620 Billion",
+      change: "+2.4%",
+      description:
+        "Smart contract blockchain.",
     },
 
     {
       name: "Brent Oil",
-      category: "Oil",
-      value: 83.1,
-      change: "-0.4%",
       logo: "🛢️",
-      info: "Global oil benchmark.",
+      type: "Oil",
+      value: 83.1,
+      marketcap: "$2.8 Trillion sector",
+      change: "-0.4%",
+      description:
+        "Global oil benchmark.",
     },
 
     {
       name: "EUR/USD",
-      category: "Currencies",
-      value: 1.11,
-      change: "+0.1%",
       logo: "💶",
-      info: "Euro to US Dollar exchange rate.",
+      type: "Currencies",
+      value: 1.11,
+      marketcap: "Forex Pair",
+      change: "+0.1%",
+      description:
+        "Euro against US Dollar.",
     },
   ]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setMarketData((prev) =>
+      setMarkets((prev) =>
         prev.map((item) => ({
           ...item,
-          value:
-            typeof item.value === "number"
-              ? Number(
-                  (
-                    item.value +
-                    (Math.random() - 0.5)
-                  ).toFixed(2)
-                )
-              : item.value,
+          value: Number(
+            (
+              item.value +
+              (Math.random() - 0.5) *
+                (item.value > 1000 ? 30 : 1)
+            ).toFixed(2)
+          ),
         }))
       );
-    }, 3000);
+    }, 2500);
 
     return () => clearInterval(interval);
   }, []);
 
-  // =========================
-  // TRADE BLOCS
-  // =========================
+  // =====================
+  // BLOCS
+  // =====================
 
   const blocs = [
     {
       name: "European Union",
       logo: "🇪🇺",
-      members: "27 Member States",
-      economy: "$20T+ GDP",
+      info:
+        "27 member states with a combined GDP above $20 trillion.",
+      members:
+        "Germany, France, Italy, Spain, Malta and others.",
       wiki:
         "https://en.wikipedia.org/wiki/European_Union",
     },
@@ -387,43 +447,47 @@ export default function Home() {
     {
       name: "ASEAN",
       logo: "🌏",
-      members: "10 Member States",
-      economy: "$4T+ GDP",
+      info:
+        "Major Southeast Asian economic bloc.",
+      members:
+        "Indonesia, Thailand, Singapore, Vietnam and others.",
       wiki:
         "https://en.wikipedia.org/wiki/ASEAN",
     },
 
     {
-      name: "EFTA",
-      logo: "❄️",
+      name: "BRICS",
+      logo: "🌐",
+      info:
+        "Emerging economies economic group.",
       members:
-        "Norway, Switzerland, Iceland, Liechtenstein",
-      economy: "$1.4T GDP",
+        "Brazil, Russia, India, China, South Africa.",
       wiki:
-        "https://en.wikipedia.org/wiki/EFTA",
+        "https://en.wikipedia.org/wiki/BRICS",
     },
 
     {
-      name: "BRICS",
-      logo: "🌐",
+      name: "EFTA",
+      logo: "❄️",
+      info:
+        "European Free Trade Association.",
       members:
-        "Brazil, Russia, India, China, South Africa",
-      economy: "$30T+ GDP",
+        "Norway, Switzerland, Iceland, Liechtenstein.",
       wiki:
-        "https://en.wikipedia.org/wiki/BRICS",
+        "https://en.wikipedia.org/wiki/EFTA",
     },
   ];
 
   const renderSpike = (positive) => (
-    <svg width="130" height="50">
+    <svg width="150" height="50">
       <polyline
         fill="none"
-        stroke={positive ? "#00ff99" : "#ff4444"}
+        stroke={positive ? "#00ff99" : "#ff5555"}
         strokeWidth="3"
         points={
           positive
-            ? "0,35 20,28 40,30 60,16 80,20 100,10 130,15"
-            : "0,10 20,14 40,18 60,30 80,22 100,36 130,32"
+            ? "0,35 20,30 40,32 60,18 80,22 100,12 130,15 150,8"
+            : "0,10 20,14 40,18 60,30 80,24 100,36 130,34 150,40"
         }
       />
     </svg>
@@ -432,15 +496,13 @@ export default function Home() {
   return (
     <div className="container">
 
-      {/* SIDEBAR */}
-
       <div className="sidebar">
 
         <div
           className="logo"
           onClick={() => setPage("dashboard")}
         >
-          Econom<span className="xLogo">𝕏</span>
+          Econom𝕏
         </div>
 
         <div className="sub">
@@ -463,27 +525,29 @@ export default function Home() {
           News
         </button>
 
-        <button onClick={() => setPage("tradeblocs")}>
+        <button onClick={() => setPage("blocs")}>
           Trade Blocs
         </button>
 
-        <div className="clockBox">
+        <div className="clock">
+
           <div className="live">
             LIVE ●
           </div>
 
-          <div>GMT: {gmtTime}</div>
+          <div>
+            GMT: {gmtTime}
+          </div>
 
-          <div>Malta: {maltaTime}</div>
+          <div>
+            Malta: {maltaTime}
+          </div>
+
         </div>
 
       </div>
 
-      {/* MAIN */}
-
       <div className="main">
-
-        {/* DASHBOARD */}
 
         {page === "dashboard" && (
           <>
@@ -491,28 +555,28 @@ export default function Home() {
               Global Dashboard
             </h1>
 
-            <div className="mapContainer">
+            <div className="mapWrap">
 
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg"
                 className="map"
               />
 
-              {countries.map((country, index) => (
+              {countries.map((country, i) => (
                 <div
-                  key={index}
-                  className="countryWrapper"
+                  key={i}
+                  className="country"
                   style={{
-                    left: country.x,
-                    top: country.y,
+                    left: `${country.x}%`,
+                    top: `${country.y}%`,
                   }}
                   onClick={() =>
                     setSelectedCountry(country)
                   }
                 >
-                  <div className="countryDot" />
+                  <div className="dot"></div>
 
-                  <div className="countryName">
+                  <div className="countryText">
                     {country.short}
                   </div>
                 </div>
@@ -522,122 +586,85 @@ export default function Home() {
           </>
         )}
 
-        {/* MARKETS */}
-
         {page === "markets" && (
           <>
             <h1 className="title">
               Markets
             </h1>
 
-            <div className="categoryTitle">
-              Companies
-            </div>
+            {[
+              "Companies",
+              "Crypto",
+              "Oil",
+              "Currencies",
+            ].map((category) => (
+              <div key={category}>
 
-            <div className="marketGrid">
+                <h2 className="sectionTitle">
+                  {category}
+                </h2>
 
-              {marketData
-                .filter(
-                  (x) =>
-                    x.category === "Companies"
-                )
-                .map((item, index) => (
-                  <div
-                    className="marketCard"
-                    key={index}
-                    onClick={() =>
-                      setSelectedMarket(item)
-                    }
-                  >
-                    <div className="marketTop">
-                      <div>
-                        <h2>
-                          {item.logo} {item.name}
-                        </h2>
-                      </div>
+                <div className="marketGrid">
 
+                  {markets
+                    .filter(
+                      (m) => m.type === category
+                    )
+                    .map((item, i) => (
                       <div
-                        className={
-                          item.change.includes("-")
-                            ? "red"
-                            : "green"
+                        className="marketCard"
+                        key={i}
+                        onClick={() =>
+                          setSelectedMarket(item)
                         }
                       >
-                        {item.change}
+
+                        <div className="marketTop">
+
+                          <h2>
+                            {item.logo} {item.name}
+                          </h2>
+
+                          <div
+                            className={
+                              item.change.includes("-")
+                                ? "red"
+                                : "green"
+                            }
+                          >
+                            {item.change}
+                          </div>
+
+                        </div>
+
+                        <div className="value">
+                          $
+                          {item.value.toLocaleString()}
+                        </div>
+
+                        <div className="cap">
+                          {item.marketcap}
+                        </div>
+
+                        {renderSpike(
+                          !item.change.includes("-")
+                        )}
+
                       </div>
-                    </div>
+                    ))}
 
-                    <h1>${item.value}</h1>
+                </div>
 
-                    {renderSpike(
-                      !item.change.includes("-")
-                    )}
-                  </div>
-                ))}
-
-            </div>
-
-            <div className="categoryTitle">
-              Crypto
-            </div>
-
-            <div className="marketGrid">
-
-              {marketData
-                .filter(
-                  (x) =>
-                    x.category === "Crypto"
-                )
-                .map((item, index) => (
-                  <div
-                    className="marketCard"
-                    key={index}
-                    onClick={() =>
-                      setSelectedMarket(item)
-                    }
-                  >
-                    <div className="marketTop">
-                      <div>
-                        <h2>
-                          {item.logo} {item.name}
-                        </h2>
-                      </div>
-
-                      <div
-                        className={
-                          item.change.includes("-")
-                            ? "red"
-                            : "green"
-                        }
-                      >
-                        {item.change}
-                      </div>
-                    </div>
-
-                    <h1>${item.value}</h1>
-
-                    {renderSpike(
-                      !item.change.includes("-")
-                    )}
-                  </div>
-                ))}
-
-            </div>
-
+              </div>
+            ))}
           </>
         )}
-
-        {/* NEWS */}
 
         {page === "news" && (
           <>
             <h1 className="title">
               Global News
             </h1>
-
-            <div className="categoryTitle">
-              Science
-            </div>
 
             <div className="newsGrid">
 
@@ -646,76 +673,49 @@ export default function Home() {
                 target="_blank"
                 className="newsCard"
               >
-                Starship Flight 12 Launch
+                🚀 Starship Flight 12 Launch
               </a>
-
-            </div>
-
-            <div className="categoryTitle">
-              Politics
-            </div>
-
-            <div className="newsGrid">
 
               <a
                 href="https://www.reuters.com/world/us/"
                 target="_blank"
                 className="newsCard"
               >
-                Trump Economic Policies
+                🇺🇸 Trump Economic Policies
               </a>
-
-            </div>
-
-            <div className="categoryTitle">
-              Finance
-            </div>
-
-            <div className="newsGrid">
 
               <a
                 href="https://www.cnbc.com/world/"
                 target="_blank"
                 className="newsCard"
               >
-                Global Markets Rally
+                📈 Global Markets Rally
               </a>
-
-            </div>
-
-            <div className="categoryTitle">
-              Technology
-            </div>
-
-            <div className="newsGrid">
 
               <a
                 href="https://www.bbc.com/news/technology"
                 target="_blank"
                 className="newsCard"
               >
-                AI Industry Expansion
+                🤖 AI Industry Expansion
               </a>
 
             </div>
-
           </>
         )}
 
-        {/* TRADE BLOCS */}
-
-        {page === "tradeblocs" && (
+        {page === "blocs" && (
           <>
             <h1 className="title">
               Trade Blocs
             </h1>
 
-            <div className="blocGrid">
+            <div className="marketGrid">
 
-              {blocs.map((bloc, index) => (
+              {blocs.map((bloc, i) => (
                 <div
-                  className="blocCard"
-                  key={index}
+                  key={i}
+                  className="marketCard"
                   onClick={() =>
                     setSelectedBloc(bloc)
                   }
@@ -724,7 +724,8 @@ export default function Home() {
                     {bloc.logo} {bloc.name}
                   </h2>
 
-                  <p>{bloc.members}</p>
+                  <p>{bloc.info}</p>
+
                 </div>
               ))}
 
@@ -733,8 +734,6 @@ export default function Home() {
         )}
 
       </div>
-
-      {/* COUNTRY PANEL */}
 
       {selectedCountry && (
         <div className="popup">
@@ -745,31 +744,53 @@ export default function Home() {
           </h1>
 
           <p>
-            GDP: {selectedCountry.gdp}
-          </p>
-
-          <p>
-            Currency:
-            {selectedCountry.currency}
-          </p>
-
-          <p>
-            Leader:
+            <b>Leader:</b>{" "}
             {selectedCountry.leader}
           </p>
 
           <p>
-            Capital:
+            <b>Capital:</b>{" "}
             {selectedCountry.capital}
           </p>
 
           <p>
-            Population:
+            <b>GDP:</b>{" "}
+            {selectedCountry.gdp}
+          </p>
+
+          <p>
+            <b>Population:</b>{" "}
             {selectedCountry.population}
           </p>
 
           <p>
-            Bloc: {selectedCountry.bloc}
+            <b>Currency:</b>{" "}
+            {selectedCountry.currency}
+          </p>
+
+          <p>
+            <b>Trade Bloc:</b>{" "}
+            {selectedCountry.bloc}
+          </p>
+
+          <p>
+            <b>Exports:</b>{" "}
+            {selectedCountry.exports}
+          </p>
+
+          <p>
+            <b>Imports:</b>{" "}
+            {selectedCountry.imports}
+          </p>
+
+          <p>
+            <b>Inflation:</b>{" "}
+            {selectedCountry.inflation}
+          </p>
+
+          <p>
+            <b>Conflict:</b>{" "}
+            {selectedCountry.war}
           </p>
 
           <button
@@ -783,8 +804,6 @@ export default function Home() {
         </div>
       )}
 
-      {/* MARKET PANEL */}
-
       {selectedMarket && (
         <div className="popup">
 
@@ -794,21 +813,28 @@ export default function Home() {
           </h1>
 
           <p>
-            Category:
-            {selectedMarket.category}
+            <b>Category:</b>{" "}
+            {selectedMarket.type}
           </p>
 
           <p>
-            Value:
-            {selectedMarket.value}
+            <b>Value:</b> $
+            {selectedMarket.value.toLocaleString()}
           </p>
 
           <p>
-            Change:
+            <b>Change:</b>{" "}
             {selectedMarket.change}
           </p>
 
-          <p>{selectedMarket.info}</p>
+          <p>
+            <b>Market Cap:</b>{" "}
+            {selectedMarket.marketcap}
+          </p>
+
+          <p>
+            {selectedMarket.description}
+          </p>
 
           <button
             onClick={() =>
@@ -821,8 +847,6 @@ export default function Home() {
         </div>
       )}
 
-      {/* BLOC PANEL */}
-
       {selectedBloc && (
         <div className="popup">
 
@@ -831,9 +855,9 @@ export default function Home() {
             {selectedBloc.name}
           </h1>
 
-          <p>{selectedBloc.members}</p>
+          <p>{selectedBloc.info}</p>
 
-          <p>{selectedBloc.economy}</p>
+          <p>{selectedBloc.members}</p>
 
           <a
             href={selectedBloc.wiki}
@@ -856,56 +880,56 @@ export default function Home() {
       <style jsx>{`
         body {
           margin: 0;
-          background: #000;
+          background: black;
           color: white;
           font-family: Arial;
         }
 
+        * {
+          box-sizing: border-box;
+        }
+
         .container {
           display: flex;
-          background: black;
           min-height: 100vh;
+          background: black;
           color: white;
         }
 
         .sidebar {
           width: 260px;
-          padding: 30px;
+          background: #050505;
           border-right: 1px solid #222;
+          padding: 28px;
           position: fixed;
           height: 100vh;
-          background: #030303;
+          overflow-y: auto;
         }
 
         .logo {
           font-size: 42px;
           font-weight: bold;
           cursor: pointer;
-          color: white;
-        }
-
-        .xLogo {
-          font-style: italic;
         }
 
         .sub {
-          color: white;
           margin-top: 8px;
+          color: #ccc;
         }
 
         .byLuke {
-          color: #aaa;
+          color: #888;
           margin-top: 10px;
-          margin-bottom: 40px;
+          margin-bottom: 35px;
         }
 
         .sidebar button {
           width: 100%;
           padding: 14px;
           margin-bottom: 14px;
-          background: #0a0a0a;
-          border: 1px solid #222;
+          background: #0b0b0b;
           color: white;
+          border: 1px solid #222;
           border-radius: 14px;
           cursor: pointer;
           transition: 0.3s;
@@ -916,7 +940,7 @@ export default function Home() {
           color: black;
         }
 
-        .clockBox {
+        .clock {
           margin-top: 30px;
           padding: 18px;
           border: 1px solid #222;
@@ -930,54 +954,66 @@ export default function Home() {
 
         .main {
           margin-left: 260px;
-          width: 100%;
-          padding: 40px;
-          color: white;
+          width: calc(100% - 260px);
+          padding: 35px;
+          overflow-x: hidden;
         }
 
         .title {
           font-size: 52px;
           margin-bottom: 30px;
-          color: white;
         }
 
-        .mapContainer {
+        .mapWrap {
           position: relative;
+          width: 100%;
           overflow: auto;
           border: 1px solid #222;
-          border-radius: 24px;
+          border-radius: 22px;
+          background: black;
         }
 
         .map {
-          width: 1600px;
+          width: 100%;
+          min-width: 1200px;
+          display: block;
           filter: brightness(1.2);
         }
 
-        .countryWrapper {
+        .country {
           position: absolute;
+          transform: translate(-50%, -50%);
           cursor: pointer;
           transition: 0.3s;
         }
 
-        .countryWrapper:hover {
-          transform: scale(1.1);
+        .country:hover {
+          transform: translate(-50%, -50%)
+            scale(1.1);
         }
 
-        .countryDot {
-          width: 14px;
-          height: 14px;
-          border-radius: 50%;
+        .dot {
+          width: 13px;
+          height: 13px;
           background: white;
+          border-radius: 50%;
         }
 
-        .countryName {
-          font-size: 11px;
+        .countryText {
+          font-size: 10px;
           color: white;
           margin-top: 4px;
+          text-align: center;
+          white-space: nowrap;
+        }
+
+        .sectionTitle {
+          margin-top: 40px;
+          margin-bottom: 20px;
+          font-size: 30px;
         }
 
         .marketGrid,
-        .blocGrid,
         .newsGrid {
           display: grid;
           grid-template-columns: repeat(
@@ -985,16 +1021,14 @@ export default function Home() {
             minmax(280px, 1fr)
           );
           gap: 20px;
-          margin-bottom: 30px;
         }
 
         .marketCard,
-        .blocCard,
         .newsCard {
           background: #090909;
           border: 1px solid #222;
           border-radius: 20px;
-          padding: 20px;
+          padding: 22px;
           transition: 0.3s;
           cursor: pointer;
           color: white;
@@ -1002,15 +1036,26 @@ export default function Home() {
         }
 
         .marketCard:hover,
-        .blocCard:hover,
         .newsCard:hover {
-          transform: translateY(-5px);
           border-color: white;
+          transform: translateY(-5px);
         }
 
         .marketTop {
           display: flex;
           justify-content: space-between;
+          align-items: center;
+        }
+
+        .value {
+          font-size: 30px;
+          margin-top: 12px;
+        }
+
+        .cap {
+          color: #aaa;
+          margin-top: 8px;
+          margin-bottom: 10px;
         }
 
         .green {
@@ -1023,22 +1068,23 @@ export default function Home() {
 
         .popup {
           position: fixed;
-          right: 30px;
-          top: 40px;
-          width: 340px;
-          background: #050505;
+          right: 25px;
+          top: 30px;
+          width: 360px;
+          max-height: 90vh;
+          overflow-y: auto;
+          background: #070707;
           border: 1px solid #333;
           border-radius: 22px;
           padding: 24px;
-          animation: fade 0.3s ease;
-          z-index: 1000;
+          z-index: 999;
         }
 
         .popup button {
-          margin-top: 20px;
+          margin-top: 18px;
           padding: 10px 18px;
-          border-radius: 12px;
           border: none;
+          border-radius: 12px;
           background: white;
           cursor: pointer;
         }
@@ -1047,22 +1093,20 @@ export default function Home() {
           color: #00ccff;
         }
 
-        .categoryTitle {
-          font-size: 28px;
-          margin-top: 40px;
-          margin-bottom: 20px;
-          color: white;
-        }
-
-        @keyframes fade {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
+        @media (max-width: 900px) {
+          .sidebar {
+            position: relative;
+            width: 100%;
+            height: auto;
           }
 
-          to {
-            opacity: 1;
-            transform: translateY(0);
+          .main {
+            margin-left: 0;
+            width: 100%;
+          }
+
+          .container {
+            flex-direction: column;
           }
         }
       `}</style>
