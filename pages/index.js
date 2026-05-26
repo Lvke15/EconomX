@@ -565,6 +565,7 @@ const styles = {
     borderRadius: "18px",
     padding: "25px",
     marginBottom: "30px",
+    animation: "fadeIn 0.3s ease"
   },
 
   marketPanel: {
@@ -615,3 +616,4 @@ const styles = {
 };
 
 
+  
